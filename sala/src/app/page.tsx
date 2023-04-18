@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import JitsiMeet from "../../Components/JitsiMeet/JitsiMeet";
-import JitsiScript from "../../Components/JitsiMeet/JitsiScript";
+import JitsiMeet from "../../Components/Jitsi/JitsiMeet";
+import JitsiScript from "../../Components/Jitsi/JitsiScript";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,7 +11,7 @@ export default function Home() {
       <>
         <h1>Hello Jitsi</h1>
         <div>
-          <JitsiScript/>
+          <JitsiScript />
           <JitsiMeet />
         </div>
       </>

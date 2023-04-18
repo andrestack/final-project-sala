@@ -23,6 +23,13 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "Components/JitsiMeet/JitsiScript.js", "Components/JitsiMeet/JitsiMeet.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "Components/Jitsi/JitsiScript.js",
+    "Components/Jitsi/JitsiMeet.js"
+  ],
   "exclude": ["node_modules"]
 }
