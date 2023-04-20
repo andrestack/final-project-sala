@@ -32,7 +32,7 @@ export default function JitsiMeet() {
     return () => {
       jitsiApi.current?.dispose?.();
     };
-  }, []);
+  },);
 
   return (
     <div
