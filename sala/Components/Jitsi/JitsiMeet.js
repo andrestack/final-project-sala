@@ -1,15 +1,23 @@
 "use client";
 import { useEffect, useRef } from "react";
-import JitsiScript from "./JitsiScript";
+
 
 export default function JitsiMeet() {
   const jitsiContainer = useRef(null);
   const jitsiApi = useRef(null);
 
+  const Chance = require("chance");
+  const chance = new Chance();
+  
+  const randomCountry = chance.country({ full: true });
+  const randomAnimal = chance.animal({ type: "ocean" });
+  // const randomNumber = chance.integer({max: 100})
+  const randomRoomName = randomCountry + randomAnimal;
+
   useEffect(() => {
     const domain = "meet.jit.si";
     const options = {
-      roomName: "Sala",
+      roomName: `${randomRoomName}`,
       width: "400px",
       height: "700px",
       parentNode: jitsiContainer.current,
