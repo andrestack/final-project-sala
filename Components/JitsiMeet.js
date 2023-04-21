@@ -37,6 +37,7 @@ export default function JitsiMeet() {
   return (
     <div
       styles={{
+        text: "center",
         padding: "10px",
         height: "400px",
         border: "10px dashed #df486f",
