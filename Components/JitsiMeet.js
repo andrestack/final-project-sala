@@ -14,8 +14,6 @@ export default function JitsiMeet() {
   // const randomRoomName = (randomCountry,randomAnimal);
 
   useEffect(() => {
-    jitsiApi.current = new JitsiMeetExternalAPI(domain, options);
-    
     const domain = "meet.jit.si";
     const options = {
       roomName: `${randomRoomNumber}`,
@@ -29,16 +27,15 @@ export default function JitsiMeet() {
       },
     };
 
-    
-   
-    
-    
-jitsiApi.addListener("videoConferenceJoined", ()=> {console.log("Hello!")});
-    
-    // const leaveMeeting = api.addListener("videoConferenceLeft", () => {console.log("you left the meeting")} );
+    jitsiApi.current = new JitsiMeetExternalAPI(domain, options);
 
-
-console.log(joinMeeting);
+    const startMeeting = jitsiApi.current.addListener("videoConferenceJoined", () => {
+      alert("You started a meeting!");
+    });
+    
+    const leaveMeeting = jitsiApi.current.addListener("videoConferenceLeft", () => {
+      alert("you left the meeting");
+    });
 
 
     return () => {
