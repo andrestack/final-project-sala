@@ -22,6 +22,7 @@ export default function JitsiMeet() {
       height: "700px",
       parentNode: jitsiContainer.current,
       configOverwrite: {},
+      lang: "de",
       interfaceConfigOverwrite: {
         SHOW_CHROME_EXTENSION_BANNER: false,
       },
@@ -29,6 +30,8 @@ export default function JitsiMeet() {
 
     jitsiApi.current = new JitsiMeetExternalAPI(domain, options);
 
+    console.log(jitsiApi);
+    
     return () => {
       jitsiApi.current?.dispose?.();
     };
