@@ -30,15 +30,15 @@ export default function LessonsPage(){
         
       
         return (
-          <form >
-            <label htmlFor="Date">Date</label>
-            <label htmlFor="Date">Course</label>
-            <label htmlFor="Date">Start Time</label>
-            <label htmlFor="Date">End Time</label>
-            <label htmlFor="Date">Units</label>
-            <label htmlFor="Date">Units</label>
+          <div className="mt-6 grid grid-cols-6 content-around" >
+            <label className="text-center" htmlFor="Date">Date</label>
+            <label className="text-center"htmlFor="Course">Course</label>
+            <label className="text-center"htmlFor="Start Time">Start Time</label>
+            <label className="text-center"htmlFor="End Time">End Time</label>
+            <label className="text-center"htmlFor="Units">Units</label>
+            <label className="text-center" htmlFor="Total">Total</label>
             
-          </form>
+          </div>
         );
       }
 
