@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+font-family: monospace
+
+}
+
 body {
   background-image: url("/background-focus.svg");
   background-repeat: no-repeat;

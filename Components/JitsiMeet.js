@@ -52,7 +52,7 @@ export default function JitsiMeet() {
       });
 
       if (!response.ok) {
-        alert("Unable to start Meeting")
+        alert("Unable to start Meeting");
       } else {
         console.error(`Error: ${response.status}`);
       }
@@ -68,7 +68,7 @@ export default function JitsiMeet() {
       });
 
       if (!response.ok) {
-        alert ("Unable to update, please inform the admin!")
+        alert("Unable to update, please inform the admin!");
       } else {
         console.error(`Error: ${response.status}`);
       }

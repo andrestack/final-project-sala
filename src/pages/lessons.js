@@ -1,48 +1,32 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import styled from "styled-components";
 
-const FormContainer = styled.form`
-  display: grid;
-  gap: 0.5rem;
-`;
+import useSWR from "swr";
+import LessonOverviewHeader from "Components/LessonOverviewHeader";
 
-const Label = styled.label`
-  font-weight: bold;
-`;
 
-const Input = styled.input`
-  padding: 0.5rem;
-  font-size: inherit;
-  border: 3px solid black;
-  border-radius: 0.5rem;
-`;
 
-const Textarea = styled.textarea`
-  font-family: inherit;
-  border: 3px solid black;
-  border-radius: 0.5rem;
-  padding: 0.5rem;`
 
-export default function LessonsPage(){
-        const router = useRouter()
-        
-        
-      
-        return (
-          <div className="mt-6 grid grid-cols-6 content-around" >
-            <label className="text-center" htmlFor="Date">Date</label>
-            <label className="text-center"htmlFor="Course">Course</label>
-            <label className="text-center"htmlFor="Start Time">Start Time</label>
-            <label className="text-center"htmlFor="End Time">End Time</label>
-            <label className="text-center"htmlFor="Units">Units</label>
-            <label className="text-center" htmlFor="Total">Total</label>
-            
-          </div>
-        );
-      }
+export default function LessonsPage() {
+  const {data} = useSWR ('/api/lessons/')
+ 
+    
+  
+  return (
+    <>
+    <h1 className="bg-none p-10 text-center font-size font-mono text-energy-200 text-2xl">
+      YOUR LESSON OVERVIEW
+    </h1>
+    <LessonOverviewHeader/>
+    <div>
+     
 
-      /*
+
+
+    </div>
+  </>
+  );
+}
+
+/*
       
       <Label htmlFor="name">Name</Label>
            /* <Input
@@ -81,5 +65,3 @@ export default function LessonsPage(){
             //   defaultValue={defaultData?.description}
             ></Textarea>
             */
-      
-    
