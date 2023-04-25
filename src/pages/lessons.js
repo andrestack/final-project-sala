@@ -1,13 +1,13 @@
 
 import useSWR from "swr";
 import LessonOverviewHeader from "Components/LessonOverviewHeader";
+import LessonOverviewList from "Components/LessonOverviewList";
 
 
 
 
 export default function LessonsPage() {
-  const {data} = useSWR ('/api/lessons/')
- 
+  
     
   
   return (
@@ -16,6 +16,7 @@ export default function LessonsPage() {
       YOUR LESSON OVERVIEW
     </h1>
     <LessonOverviewHeader/>
+    <LessonOverviewList/>
     <div>
      
 

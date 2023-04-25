@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 const lessonSchema = new Schema({
   startTime: { type: Number, required: true },
   endTime: { type: Number },
-  jitsiId: { type: String, required: true },
+  roomName: { type: String, required: true },
 });
 
 const Lesson = mongoose.models.Lesson || mongoose.model("Lesson", lessonSchema);
