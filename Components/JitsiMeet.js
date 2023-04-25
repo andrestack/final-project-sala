@@ -29,14 +29,57 @@ export default function JitsiMeet() {
 
     jitsiApi.current = new JitsiMeetExternalAPI(domain, options);
 
-    const startMeeting = jitsiApi.current.addListener("videoConferenceJoined", () => {
-      alert("You started a meeting!");
-    });
-    
-    const leaveMeeting = jitsiApi.current.addListener("videoConferenceLeft", () => {
-      alert("you left the meeting");
-    });
+    const startMeeting = jitsiApi.current.addListener(
+      "videoConferenceJoined",
+      () => {
+        alert("You started a meeting!");
+      }
+    );
 
+    const leaveMeeting = jitsiApi.current.addListener(
+      "videoConferenceLeft",
+      () => {
+        alert("you left the meeting");
+      }
+    );
+
+    // console.log(options.roomName);
+
+    async function handleMeetingStart(event) {
+      event.preventDefault();
+
+      const response = await fetch("/api/start-unit", {
+        method: "POST",
+        body: JSON.stringify(startMeeting, options.roomName),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        await response.json();
+      } else {
+        console.error(`Error: ${response.status}`);
+      }
+    }
+
+    async function handleMeetingEnd(event) {
+      event.preventDefault();
+
+      const response = await fetch("/api/end-unit", {
+        method: "PATCH",
+        body: JSON.stringify(leaveMeeting, options.roomName),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        await response.json();
+      } else {
+        console.error(`Error: ${response.status}`);
+      }
+    }
 
     return () => {
       jitsiApi.current?.dispose?.();
