@@ -4,8 +4,9 @@ import { useEffect } from "react";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function LessonOverviewList() {
-  const { data } = useSWR("/api/", fetcher);
+  const { data } = useSWR("/api/", fetcher, {fallbackData: []});
   console.log(data);
+
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -51,7 +52,7 @@ export default function LessonOverviewList() {
           );
         })}
       </div>
-      <p>{data.roomName}</p>
+      
     </>
   );
 }
