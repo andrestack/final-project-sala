@@ -4,14 +4,11 @@ import Lesson from "db/models/Lesson";
 export default async function handler(request, response) {
   await dbConnect();
   const { id: jitsiId } = request.query;
-  const endTime= new Date()
+  const endTime = new Date();
 
   switch (request.method) {
     case "PATCH":
-      const lesson = await Lesson.findByIdAndUpdate({
-        jitsiId,
-        endTime
-      });
+      const lesson = await Lesson.findOneAndUpdate({ jitsiId }, { endTime });
       response.status(200).json(lesson);
     default:
       return response.status(404).json({ status: "Not found" });
