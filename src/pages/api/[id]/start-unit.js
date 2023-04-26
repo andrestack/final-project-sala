@@ -5,7 +5,7 @@ export default async function handler(request, response) {
   await dbConnect();
   const { id: roomName } = request.query;
   const startTime = new Date()
-
+  
   switch (request.method) {
     case "POST":
       const lesson = await Lesson.create({

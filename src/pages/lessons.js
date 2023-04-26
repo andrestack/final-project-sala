@@ -12,7 +12,7 @@ export default function LessonsPage() {
   
   return (
     <>
-    <h1 className="bg-none p-10 text-center font-size font-mono text-energy-200 text-2xl">
+    <h1 className="bg-none p-10 text-center font-mono text-energy-200 text-2xl">
       YOUR LESSON OVERVIEW
     </h1>
     <LessonOverviewHeader/>

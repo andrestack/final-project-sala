@@ -11,7 +11,7 @@ export default function JitsiMeet() {
   const randomCountry = chance.country({ full: true });
   const randomAnimal = chance.animal({ type: "ocean" });
   const randomRoomNumber = chance.natural({ min: 156789547, max: 999999999 });
-  const randomRoomName = (randomCountry,randomAnimal);
+  const randomRoomName = randomCountry+randomAnimal;
 
   useEffect(() => {
     const domain = "meet.jit.si";
@@ -30,12 +30,12 @@ export default function JitsiMeet() {
     jitsiApi.current = new JitsiMeetExternalAPI(domain, options);
 
     jitsiApi.current.addListener("videoConferenceJoined", () => {
-      alert("You started a meeting!");
+      alert("The start time has been registered!");
       handleMeetingStart();
     });
 
     jitsiApi.current.addListener("videoConferenceLeft", () => {
-      alert("Are you sure you want to leave the meeting?");
+      alert("The end time has been registered. Are you sure  want to leave the meeting?");
       handleMeetingEnd();
     });
 
@@ -52,7 +52,7 @@ export default function JitsiMeet() {
       });
 
       if (!response.ok) {
-        alert("Unable to register meeting");
+        alert("Unable to register meeting start time. Please inform the admin");
       } else {
         console.error(`Error: ${response.status}`);
       }
@@ -68,7 +68,7 @@ export default function JitsiMeet() {
       });
 
       if (!response.ok) {
-        alert("Unable to update, please inform the admin!");
+        alert("Unable to register meeting end time. Please inform the admin to update, please inform the admin!");
       } else {
         console.error(`Error: ${response.status}`);
       }
