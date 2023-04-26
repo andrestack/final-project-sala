@@ -15,3 +15,9 @@ export default function Document() {
     </Html>
   )
 }
+
+/*
+
+1. api route "lessons/[id]"
+
+*/
