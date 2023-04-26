@@ -1,10 +1,15 @@
 import useSWR from "swr";
-import { useEffect } from "react";
+import useSelectAllStore from "utils/useCheckBoxStore";
+
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function LessonOverviewList() {
+  const {selectAll, toggleSelectAll } = useSelectAllStore();
+
   const { data } = useSWR("/api/lessons", fetcher, { fallbackData: [] });
+
+
 
   function lessonUnits(millis) {
     return millis < 2700000 ? 0 : millis <= 4800000 && millis > 2700000 ? 1 : 2;
@@ -28,7 +33,12 @@ export default function LessonOverviewList() {
               className="h-7 my-2 grid grid-cols-7 content-around text-energy-400 text-xl"
               key={lesson._id}
             >
-              <input type="checkbox" className=""></input>
+              <input
+              
+                type="checkbox"
+                checked={selectAll}
+                
+              ></input>
               <li>{date}</li>
               <li></li>
               <li>{millisToMinutesAndSeconds(duration)}</li>
