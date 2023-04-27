@@ -21,7 +21,12 @@ export default function LessonOverviewList({ selectAllBoxes }) {
     const lessonData = Object.fromEntries(formData);
     console.log("here", lessonData);
   }
+/*
+POST request an neues Schema "invoices" mit allen overview
+POST findbyid
 
+
+*/
   function lessonUnits(millis) {
     return millis < 2700000 ? 0 : millis <= 4800000 && millis > 2700000 ? 1 : 2;
   }
@@ -33,7 +38,7 @@ export default function LessonOverviewList({ selectAllBoxes }) {
   }
 
   return (
-    <form>
+    <form onSubmit={handleSubmitInvoice}>
       <div role="list" className="text-center font-mono mt-6">
         {data.map((lesson) => {
           const duration = lesson.endTime - lesson.startTime;
@@ -46,9 +51,9 @@ export default function LessonOverviewList({ selectAllBoxes }) {
               id="lessons"
             >
               <input
+                name={lesson.roomName}
                 value={lesson._id}
                 type="checkbox"
-                name="lesson"
                 checked={selectAllBoxes ? "checked" : false}
               ></input>
               <label htmlFor="date">{date}</label>
@@ -63,14 +68,7 @@ export default function LessonOverviewList({ selectAllBoxes }) {
           );
         })}
 
-        <button
-          form="lessons"
-          name="submit"
-          type="submit"
-          onClick={handleSubmitInvoice}
-        >
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </div>
     </form>
   );
