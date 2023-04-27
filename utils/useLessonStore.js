@@ -10,12 +10,7 @@ const useLessonStore = create((set) => ({
       })),
     })),
 
-
-
-
-  toggleSelectAll: () => set((state) => ({ selectAll: !state.selectAll })),
+  
 }));
-
-
 
 export default useLessonStore;

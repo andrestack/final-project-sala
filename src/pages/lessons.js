@@ -2,11 +2,13 @@
 import useSWR from "swr";
 import LessonOverviewHeader from "Components/LessonOverviewHeader";
 import LessonOverviewList from "Components/LessonOverviewList";
-
+import {useState} from "react"
 
 
 
 export default function LessonsPage() {
+  const [selectAll, setSelectAll] = useState (false);
+
   
     
   
@@ -15,8 +17,8 @@ export default function LessonsPage() {
     <h1 className="bg-none p-10 text-center font-mono text-energy-200 text-2xl">
       YOUR LESSON OVERVIEW
     </h1>
-    <LessonOverviewHeader/>
-    <LessonOverviewList/>
+    <LessonOverviewHeader handleSelectAll={setSelectAll} selectAll={selectAll}/>
+    <LessonOverviewList selectAllBoxes={selectAll}/>
     <div>
      
 
