@@ -9,6 +9,8 @@ const useLessonStore = create((set) => ({
         checked: false,
       })),
     })),
+    // checked: true,
+    // toggleChecked: () => set((state) => ({ checked: !state.checked })),
 
   
 }));
