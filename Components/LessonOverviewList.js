@@ -7,7 +7,7 @@ export default function LessonOverviewList({ selectAllBoxes }) {
   const { data, isLoading, error } = useSWR("/api/lessons", fetcher, {
     fallbackData: [],
   });
-  console.log("data", data);
+  // console.log("data", data);
 
   if (error) return <h1>ERROR</h1>;
   if (isLoading) return <h1>Is isLoading</h1>;
@@ -20,14 +20,51 @@ export default function LessonOverviewList({ selectAllBoxes }) {
     const formData = new FormData(event.target);
     const lessonData = Object.fromEntries(formData);
     console.log("here", lessonData);
+
+    const lessonIds = [];
+    for (let lesson in lessonData) {
+      console.log(lesson);
+      lessonIds.push(lessonData[lesson]);
+    }
+
+    const url = `/api/invoices`;
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(lessonIds),
+      headers: { "Content-Type": "application/json" },
+    });
+    
+
+    if (!response.ok) {
+      alert("Could not submit information properly. Please inform the admin");
+    } else {
+      console.error(`Error: ${response.status}`);
+    }
   }
-/*
+
+  /* Transform lessondata into an array of the lesson ids: for in prop value
+create a POST route 
+
+*/
+
+  /*
 POST request an neues Schema "invoices" mit allen overview
 POST findbyid
 
 
 */
   function lessonUnits(millis) {
+    // if(millis< 2700000){ !--- this is 45 minutes
+    //   return 0 }
+    //   else if(millis <= 4800000 !--- this is 80 Minutes ---! && millis > 2700000){
+    //     return 1 }
+    //   else{
+    //     return 2
+    //   }
+
+    //   }
+    // }
+    
     return millis < 2700000 ? 0 : millis <= 4800000 && millis > 2700000 ? 1 : 2;
   }
 
@@ -73,32 +110,3 @@ POST findbyid
     </form>
   );
 }
-
-// const { data, isLoading, error } = useSWR("/api/lessons", fetcher, {
-//   fallbackData: [],
-// });
-
-// useEffect(() => {
-//   if (data.length === 0) {
-//     setLessons(data);
-//   }
-// }, []);
-
-// if (error) return <h1>ERROR</h1>;
-// if (isLoading) return <h1>Is isLoading</h1>;
-
-// setLessons(data);
-
-// console.log("SetLessons: ");
-// console.log("here:", data);
-
-// const fetcher = (...args) => {
-//   console.log("here");
-//   fetch(...args).then((res) => res.json());
-// };
-
-/*
-
-
-
-*/
