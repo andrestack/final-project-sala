@@ -7,6 +7,7 @@ const lessonSchema = new Schema({
   endTime: { type: Number },
   roomName: { type: String, required: true },
   unitTotal: { type: Number, required: false },
+  euroTotal: { type: Number, required: false },
 });
 
 const Lesson = mongoose.models.Lesson || mongoose.model("Lesson", lessonSchema);

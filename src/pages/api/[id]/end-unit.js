@@ -18,8 +18,10 @@ export default async function handler(request, response) {
      const startTime = lesson.startTime;
      const duration = endTime - startTime;
      const unitTotal = lessonUnits(duration)
-
-     const updatedLesson = await Lesson.updateOne({roomName}, {endTime, unitTotal }  )
+     const fee = 25
+     const euroTotal=lessonUnits(fee)
+console.log(euroTotal);
+     const updatedLesson = await Lesson.updateOne({roomName}, {endTime, unitTotal, euroTotal }  )
       /* first get the lesson and then calculate how long it took by examining 
       the start and end time and then assign a value of endtime and then also of unit */
       response.status(200).json(updatedLesson);

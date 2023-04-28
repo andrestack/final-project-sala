@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import { useState } from "react";
+import { lessonUnits } from "utils/lessonUnits";
 // import useCheckBoxStore from "utils/useCheckBoxStore";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -12,21 +13,24 @@ export default function LessonOverviewList({ selectAllBoxes }) {
   if (error) return <h1>ERROR</h1>;
   if (isLoading) return <h1>Is isLoading</h1>;
 
-  // const [lessons, setLessons] = useState([]);
+  
 
   async function handleSubmitInvoice(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
     const lessonData = Object.fromEntries(formData);
-    console.log("here", lessonData);
+    // console.log("here", lessonData);
+
+    // transform lessonData into an array of ids
 
     const lessonIds = [];
     for (let lesson in lessonData) {
-      console.log(lesson);
+      
       lessonIds.push(lessonData[lesson]);
+      // console.log(lessonIds);
     }
-
+// create a POST fetch
     const url = `/api/invoices`;
     const response = await fetch(url, {
       method: "POST",
@@ -42,8 +46,8 @@ export default function LessonOverviewList({ selectAllBoxes }) {
     }
   }
 
-  /* Transform lessondata into an array of the lesson ids: for in prop value
-create a POST route 
+  
+/* create a POST route 
 
 */
 
@@ -53,20 +57,7 @@ POST findbyid
 
 
 */
-  function lessonUnits(millis) {
-    // if(millis< 2700000){ !--- this is 45 minutes
-    //   return 0 }
-    //   else if(millis <= 4800000 !--- this is 80 Minutes ---! && millis > 2700000){
-    //     return 1 }
-    //   else{
-    //     return 2
-    //   }
-
-    //   }
-    // }
-    
-    return millis < 2700000 ? 0 : millis <= 4800000 && millis > 2700000 ? 1 : 2;
-  }
+  lessonUnits();
 
   function millisToMinutesAndSeconds(millis) {
     var minutes = Math.floor(millis / 60000);
@@ -82,7 +73,7 @@ POST findbyid
           const date = new Date(lesson.startTime).toLocaleDateString();
           const fee = 25;
           return (
-            <ul
+            <div
               className="h-7 my-2 grid grid-cols-7 content-around text-energy-400 text-xl"
               key={lesson._id}
               id="lessons"
@@ -101,7 +92,7 @@ POST findbyid
               <label htmlFor="units">{lessonUnits(duration)}</label>
               <label htmlFor="fee">{fee}</label>
               <label htmlFor="total">{lessonUnits(fee)}</label>
-            </ul>
+            </div>
           );
         })}
 
