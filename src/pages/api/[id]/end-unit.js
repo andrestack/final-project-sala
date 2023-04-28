@@ -7,21 +7,17 @@ export default async function handler(request, response) {
   const { id: roomName } = request.query;
   const endTime = new Date();
 
-
-  
-
-  
   switch (request.method) {
     case "PATCH":
-      
       const lesson = await Lesson.findOne({ roomName });
-     const startTime = lesson.startTime;
-     const duration = endTime - startTime;
-     const unitTotal = lessonUnits(duration)
-     const fee = 25
-     const euroTotal=lessonUnits(fee)
-console.log(euroTotal);
-     const updatedLesson = await Lesson.updateOne({roomName}, {endTime, unitTotal, euroTotal }  )
+      const startTime = lesson.startTime;
+      const duration = endTime - startTime;
+      const unitTotal = lessonUnits(duration);
+
+      const updatedLesson = await Lesson.updateOne(
+        { roomName },
+        { endTime, unitTotal }
+      );
       /* first get the lesson and then calculate how long it took by examining 
       the start and end time and then assign a value of endtime and then also of unit */
       response.status(200).json(updatedLesson);

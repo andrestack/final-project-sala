@@ -6,7 +6,7 @@ export default function LessonOverviewHeader({handleSelectAll,selectAll}) {
 
 
   return (
-    <div className="text-xl mt-6 grid grid-cols-7 content-around bg-gradient-to-r from-energy-100 to-energy-400 h-10">
+    <div className="text-xl mt-6 grid grid-cols-5 content-around bg-gradient-to-r from-energy-100 to-energy-400 h-10">
       
       <input
         type="checkbox"
@@ -31,12 +31,12 @@ export default function LessonOverviewHeader({handleSelectAll,selectAll}) {
       <label className="text-center font-mono" htmlFor="Units">
         Units
       </label>
-      <label className="text-center font-mono" htmlFor="Units">
+      {/* <label className="text-center font-mono" htmlFor="Units">
         €/Unit
       </label>
       <label className="text-center font-mono" htmlFor="Total">
         €/Total
-      </label>
+      </label> */}
     </div>
   );
 }

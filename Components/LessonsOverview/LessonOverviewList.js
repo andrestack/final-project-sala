@@ -10,10 +10,14 @@ export default function LessonOverviewList({ selectAllBoxes }) {
   });
   // console.log("data", data);
 
+  const filteredData = data.filter((lesson) =>
+    !lesson.isInvoiced ? lesson : null
+  );
+
+  console.log(filteredData);
+
   if (error) return <h1>ERROR</h1>;
   if (isLoading) return <h1>Is isLoading</h1>;
-
-  
 
   async function handleSubmitInvoice(event) {
     event.preventDefault();
@@ -26,18 +30,16 @@ export default function LessonOverviewList({ selectAllBoxes }) {
 
     const lessonIds = [];
     for (let lesson in lessonData) {
-      
       lessonIds.push(lessonData[lesson]);
       // console.log(lessonIds);
     }
-// create a POST fetch
+    // create a POST fetch
     const url = `/api/invoices`;
     const response = await fetch(url, {
       method: "POST",
       body: JSON.stringify(lessonIds),
       headers: { "Content-Type": "application/json" },
     });
-    
 
     if (!response.ok) {
       alert("Could not submit information properly. Please inform the admin");
@@ -46,8 +48,7 @@ export default function LessonOverviewList({ selectAllBoxes }) {
     }
   }
 
-  
-/* create a POST route 
+  /* create a POST route 
 
 */
 
@@ -74,7 +75,7 @@ POST findbyid
           const fee = 25;
           return (
             <div
-              className="h-7 my-2 grid grid-cols-7 content-around text-energy-400 text-xl"
+              className="h-7 my-2 grid grid-cols-5 content-around text-energy-400 text-xl"
               key={lesson._id}
               id="lessons"
             >
@@ -82,7 +83,7 @@ POST findbyid
                 name={lesson.roomName}
                 value={lesson._id}
                 type="checkbox"
-                checked={selectAllBoxes ? "checked" : false}
+                checked={selectAllBoxes ? "checked" : null}
               ></input>
               <label htmlFor="date">{date}</label>
               <label htmlFor="course-code"></label>
@@ -90,8 +91,8 @@ POST findbyid
                 {millisToMinutesAndSeconds(duration)}
               </label>
               <label htmlFor="units">{lessonUnits(duration)}</label>
-              <label htmlFor="fee">{fee}</label>
-              <label htmlFor="total">{lessonUnits(fee)}</label>
+              {/* <label htmlFor="fee">{fee}</label>
+              <label htmlFor="total">{lessonUnits(fee)}</label> */}
             </div>
           );
         })}

@@ -3,9 +3,9 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const invoiceSchema = new Schema({
-  total: { type: Number, required: false },
+  total: { type: Number},
   lessons: [{ type: mongoose.Schema.Types.ObjectId, ref: "Lesson" }],
-  date: { type: String, required: false },
+  date: { type: String},
 });
 
 const Invoice =

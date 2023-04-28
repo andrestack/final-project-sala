@@ -1,24 +1,40 @@
 import dbConnect from "db/connect";
 import Invoice from "db/models/Invoice";
-
+import Lesson from "db/models/Lesson";
 
 export default async function handler(request, response) {
   await dbConnect();
-  const{ lessonId} = request.query
 
   if (request.method === "POST") {
     try {
       const invoiceData = request.body;
-      console.log(invoiceData)
-      const invoice = new Invoice(invoiceData);
-      
-      await invoice.save();
+
+      async function createInvoiceFromLession(id) {
+        const lessonData = await Lesson.findByIdAndUpdate(id, {
+          isInvoiced: true,
+        });
+        console.log(lessonData);
+        lessonData.save();
+      }
+
+      invoiceData.forEach((data) => {
+        createInvoiceFromLession(data);
+      });
+
       response.status(201).json({ status: "Invoice info submitted" });
     } catch (error) {
       console.log(error);
-      
+
       response.status(400).json({ error: error.message });
     }
+  }
+
+  if (request.method === "GET") {
+    const invoices = await Invoice.find();
+    console.log(invoices);
+    return response.status(200).json(invoices);
+  } else {
+    return response.status(405).json({ message: "Method not allowed" });
   }
 }
 
