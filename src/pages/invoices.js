@@ -1,6 +1,7 @@
 import InvoiceOverviewHeader from "Components/InvoicesPage/InvoiceOverviewHeader";
 import InvoiceOverviewList from "Components/InvoicesPage/InvoiceOverviewList";
 import { useState } from "react";
+import InvoiceForm from "Components/InvoicesPage/InvoiceForm";
 
 export default function InvoicesPage(){
     const [selectAll, setSelectAll] = useState (false);
@@ -15,6 +16,7 @@ export default function InvoicesPage(){
       </h1>
       <InvoiceOverviewHeader handleSelectAll={setSelectAll} selectAll={selectAll}/>
       <InvoiceOverviewList selectAllBoxes={selectAll}/>
+      <InvoiceForm></InvoiceForm>
       <div>
        
   

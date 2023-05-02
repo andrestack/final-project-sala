@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import { useState } from "react";
 import { lessonUnits } from "utils/lessonUnits";
-// import useCheckBoxStore from "utils/useCheckBoxStore";
+
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function LessonOverviewList({ selectAllBoxes }) {
@@ -69,10 +69,10 @@ POST findbyid
   return (
     <form onSubmit={handleSubmitInvoice}>
       <div role="list" className="text-center font-mono mt-6">
-        {data.map((lesson) => {
+        {filteredData.map((lesson) => {
           const duration = lesson.endTime - lesson.startTime;
           const date = new Date(lesson.startTime).toLocaleDateString();
-          const fee = 25;
+
           return (
             <div
               className="h-7 my-2 grid grid-cols-5 content-around text-energy-400 text-xl"
@@ -97,7 +97,12 @@ POST findbyid
           );
         })}
 
-        <button type="submit">Submit</button>
+        <button
+          className="font-mono m-auto bg-gradient-to-r from-energy-100 to-energy-400 hover:from-focus-400 hover:to-focus-100 rounded-md text-white p-4 text-align-center"
+          type="submit"
+        >
+          Submit
+        </button>
       </div>
     </form>
   );

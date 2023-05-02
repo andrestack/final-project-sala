@@ -4,16 +4,27 @@ import { lessonUnits } from "utils/lessonUnits";
 // import useCheckBoxStore from "utils/useCheckBoxStore";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-export default function LessonOverviewList({  }) {
-  const { data, isLoading, error } = useSWR("/api/invoices", fetcher, {
+export default function LessonOverviewList({ selectAllBoxes }) {
+  const { data, isLoading, error } = useSWR("/api/lessons", fetcher, {
     fallbackData: [],
   });
 
-  
+  console.log(data.unitTotal);
+
+  const filteredData = data.filter((lesson) =>
+    lesson.isInvoiced ? lesson : null
+  );
+
+  function millisToMinutesAndSeconds(millis) {
+    var minutes = Math.floor(millis / 60000);
+    var seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+  }
+
   return (
-    <form >
+    <form>
       <div role="list" className="text-center font-mono mt-6">
-        {data.map((lesson) => {
+        {filteredData.map((lesson) => {
           const duration = lesson.endTime - lesson.startTime;
           const date = new Date(lesson.startTime).toLocaleDateString();
           const fee = 25;
@@ -34,9 +45,9 @@ export default function LessonOverviewList({  }) {
               <label htmlFor="duration">
                 {millisToMinutesAndSeconds(duration)}
               </label>
-              <label htmlFor="units">{lessonUnits(duration)}</label>
+              <label htmlFor="units">{lesson.unitTotal}</label>
               <label htmlFor="fee">{fee}</label>
-              <label htmlFor="total">{lessonUnits(fee)}</label>
+              <label htmlFor="total">{lessonUnits(duration, fee)}</label>
             </div>
           );
         })}

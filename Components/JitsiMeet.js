@@ -35,7 +35,7 @@ export default function JitsiMeet() {
     });
 
     jitsiApi.current.addListener("videoConferenceLeft", () => {
-      alert("The end time has been registered. Are you sure  want to leave the meeting?");
+      alert("The end time has been registered. You will end the meeting");
       handleMeetingEnd();
     });
 
@@ -68,7 +68,7 @@ export default function JitsiMeet() {
       });
 
       if (!response.ok) {
-        alert("Unable to register meeting end time. Please inform the admin to update, please inform the admin!");
+        alert("Unable to register meeting end time. Please inform the admin");
       } else {
         console.error(`Error: ${response.status}`);
       }

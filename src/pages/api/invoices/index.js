@@ -9,18 +9,18 @@ export default async function handler(request, response) {
     try {
       const invoiceData = request.body;
 
-      async function createInvoiceFromLession(id) {
+      async function createInvoiceFromLesson(id) {
         const lessonData = await Lesson.findByIdAndUpdate(id, {
           isInvoiced: true,
         });
-        console.log(lessonData);
+     
         lessonData.save();
       }
 
       invoiceData.forEach((data) => {
-        createInvoiceFromLession(data);
+        createInvoiceFromLesson(data);
       });
-
+console.log(invoiceData)
       response.status(201).json({ status: "Invoice info submitted" });
     } catch (error) {
       console.log(error);
@@ -31,7 +31,7 @@ export default async function handler(request, response) {
 
   if (request.method === "GET") {
     const invoices = await Invoice.find();
-    console.log(invoices);
+ 
     return response.status(200).json(invoices);
   } else {
     return response.status(405).json({ message: "Method not allowed" });
