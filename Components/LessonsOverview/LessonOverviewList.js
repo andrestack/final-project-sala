@@ -19,19 +19,19 @@ export default function LessonOverviewList({ selectAllBoxes }) {
   if (error) return <h1>ERROR</h1>;
   if (isLoading) return <h1>Is isLoading</h1>;
 
-  async function handleSubmitInvoice(event) {
+  async function handleSubmitLessons(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
     const lessonData = Object.fromEntries(formData);
-    // console.log("here", lessonData);
+    console.log("here", lessonData);
 
-    // transform lessonData into an array of ids
+    
 
     const lessonIds = [];
     for (let lesson in lessonData) {
       lessonIds.push(lessonData[lesson]);
-      // console.log(lessonIds);
+      console.log(lessonIds);
     }
     // create a POST fetch
     const url = `/api/invoices`;
@@ -67,7 +67,7 @@ POST findbyid
   }
 
   return (
-    <form onSubmit={handleSubmitInvoice}>
+    <form onSubmit={handleSubmitLessons}>
       <div role="list" className="text-center font-mono mt-6">
         {filteredData.map((lesson) => {
           const duration = lesson.endTime - lesson.startTime;
@@ -90,7 +90,7 @@ POST findbyid
               <label htmlFor="duration">
                 {millisToMinutesAndSeconds(duration)}
               </label>
-              <label htmlFor="units">{lessonUnits(duration)}</label>
+              <label htmlFor="units">{lesson.unitTotal}</label>
               {/* <label htmlFor="fee">{fee}</label>
               <label htmlFor="total">{lessonUnits(fee)}</label> */}
             </div>

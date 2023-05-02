@@ -1,6 +1,5 @@
-import useButtonStore from "../utils/useButtonStore";
-import JitsiMeet from "./JitsiMeet";
-
+import useButtonStore from "../../utils/useButtonStore";
+import JitsiMeet from "../JitsiMeet";
 
 export default function ButtonOpenJitsi() {
   const isVisible = useButtonStore((state) => state.isVisible);

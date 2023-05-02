@@ -17,8 +17,9 @@ export default function InvoiceForm() {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        Address:
+        
         <input
+        placeholder="Your address"
           type="text"
           value={address}
           onChange={(event) => setAddress(event.target.value)}
@@ -26,8 +27,9 @@ export default function InvoiceForm() {
       </label>
       <br />
       <label>
-        Bank Details:
+        
         <input
+        placeholder="Your IBAN"
           type="text"
           value={bankDetails}
           onChange={(event) => setBankDetails(event.target.value)}
@@ -35,8 +37,9 @@ export default function InvoiceForm() {
       </label>
       <br />
       <label>
-        TAX ID:
+        
         <input
+        placeholder="Your Tax Number"
           type="text"
           value={taxID}
           onChange={(event) => setTaxID(event.target.value)}
@@ -44,7 +47,7 @@ export default function InvoiceForm() {
       </label>
       <br />
       <label>
-        Date:
+        
         <input
           type="date"
           value={date}
@@ -53,7 +56,7 @@ export default function InvoiceForm() {
       </label>
       <br />
       <label>
-        Main Section:
+        
         <textarea
           value={mainSectionData}
           onChange={(event) => setMainSectionData(event.target.value)}
@@ -61,22 +64,24 @@ export default function InvoiceForm() {
       </label>
       <br />
       <label>
-        Other Info:
+        
         <textarea
+        placeholder="Other info"
           value={otherInfo}
           onChange={(event) => setOtherInfo(event.target.value)}
         />
       </label>
       <br />
       <label>
-        Footer:
+      
         <textarea
+        placeholder="footer"
           value={footer}
           onChange={(event) => setFooter(event.target.value)}
         />
       </label>
       <br />
-      <button type="submit">Submit</button>
+      <button           className="font-mono m-auto bg-gradient-to-r from-energy-100 to-energy-400 hover:from-focus-400 hover:to-focus-100 rounded-md text-white p-4 text-align-center"type="submit">Create Invoice</button>
     </form>
   );
 }

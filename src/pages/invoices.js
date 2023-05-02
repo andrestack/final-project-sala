@@ -16,7 +16,7 @@ export default function InvoicesPage(){
       </h1>
       <InvoiceOverviewHeader handleSelectAll={setSelectAll} selectAll={selectAll}/>
       <InvoiceOverviewList selectAllBoxes={selectAll}/>
-      <InvoiceForm></InvoiceForm>
+      
       <div>
        
   

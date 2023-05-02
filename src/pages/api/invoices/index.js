@@ -8,6 +8,7 @@ export default async function handler(request, response) {
   if (request.method === "POST") {
     try {
       const invoiceData = request.body;
+      console.log(invoiceData)
 
       async function createInvoiceFromLesson(id) {
         const lessonData = await Lesson.findByIdAndUpdate(id, {
@@ -20,7 +21,7 @@ export default async function handler(request, response) {
       invoiceData.forEach((data) => {
         createInvoiceFromLesson(data);
       });
-console.log(invoiceData)
+
       response.status(201).json({ status: "Invoice info submitted" });
     } catch (error) {
       console.log(error);
@@ -29,13 +30,13 @@ console.log(invoiceData)
     }
   }
 
-  if (request.method === "GET") {
-    const invoices = await Invoice.find();
+  // if (request.method === "GET") {
+  //   const invoices = await Invoice.find();
  
-    return response.status(200).json(invoices);
-  } else {
-    return response.status(405).json({ message: "Method not allowed" });
-  }
+  //   return response.status(200).json(invoices);
+  // } else {
+  //   return response.status(405).json({ message: "Method not allowed" });
+  // }
 }
 
 /*
