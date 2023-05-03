@@ -1,6 +1,10 @@
 import { useState } from "react";
+import useSWR from "swr";
 
-export default function InvoiceForm() {
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
+export default function InvoiceForm({ lessonsIds }) {
+  console.log("LESSONS IN INVOICE: ", lessonsIds);
   const [address, setAddress] = useState("");
   const [bankDetails, setBankDetails] = useState("");
   const [taxID, setTaxID] = useState("");
@@ -9,37 +13,57 @@ export default function InvoiceForm() {
   const [otherInfo, setOtherInfo] = useState("");
   const [footer, setFooter] = useState("");
 
-  function handleSubmit(event) {
+  // const { data, isLoading, error } = useSWR("/api/invoices", fetcher, {
+  //   fallbackData: [],
+  // });
+  // if (error) return <h1>ERROR</h1>;
+  // if (isLoading) return <h1>Is isLoading</h1>;
+  // console.log(data);
+
+  async function handleSubmit(event) {
     event.preventDefault();
-    // Handle form submission here, e.g. submit data to backend API
   }
 
+  //   const url = `/api/invoices`;
+  //   const response = await fetch(url, {
+  //     method: "POST",
+  //     body: JSON.stringify(lessonIds),
+  //     headers: { "Content-Type": "application/json" },
+  //   });
+
+  //   if (!response.ok) {
+  //     alert("Could not submit information properly. Please inform the admin");
+  //   } else {
+  //     console.error(`Error: ${response.status}`);
+  //   }
+  // }
+
+  // Handle form submission here, e.g. submit data to backend API
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="" onSubmit={handleSubmit}>
       <label>
-        
         <input
-        placeholder="Your address"
+          placeholder="Your address"
           type="text"
           value={address}
           onChange={(event) => setAddress(event.target.value)}
         />
       </label>
       <br />
+
       <label>
-        
         <input
-        placeholder="Your IBAN"
+          placeholder="Your IBAN"
           type="text"
           value={bankDetails}
           onChange={(event) => setBankDetails(event.target.value)}
         />
       </label>
+
       <br />
       <label>
-        
         <input
-        placeholder="Your Tax Number"
+          placeholder="Your Tax Number"
           type="text"
           value={taxID}
           onChange={(event) => setTaxID(event.target.value)}
@@ -47,7 +71,6 @@ export default function InvoiceForm() {
       </label>
       <br />
       <label>
-        
         <input
           type="date"
           value={date}
@@ -55,33 +78,43 @@ export default function InvoiceForm() {
         />
       </label>
       <br />
-      <label>
-        
-        <textarea
-          value={mainSectionData}
-          onChange={(event) => setMainSectionData(event.target.value)}
-        />
-      </label>
-      <br />
-      <label>
-        
-        <textarea
-        placeholder="Other info"
-          value={otherInfo}
-          onChange={(event) => setOtherInfo(event.target.value)}
-        />
-      </label>
-      <br />
-      <label>
-      
-        <textarea
-        placeholder="footer"
-          value={footer}
-          onChange={(event) => setFooter(event.target.value)}
-        />
-      </label>
-      <br />
-      <button           className="font-mono m-auto bg-gradient-to-r from-energy-100 to-energy-400 hover:from-focus-400 hover:to-focus-100 rounded-md text-white p-4 text-align-center"type="submit">Create Invoice</button>
+
+      <div className="h-7 my-2 grid grid-cols-6 justify-center text-white text-sm">
+        <>
+          <label>test</label>
+          <label>test</label>
+          <label>test</label>
+          <label>test</label>
+          <label>test</label>
+          <label>test</label>
+        </>
+
+        <br />
+        <label>
+          <textarea
+            placeholder="Other info"
+            value={otherInfo}
+            onChange={(event) => setOtherInfo(event.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          <textarea
+            placeholder="footer"
+            value={footer}
+            onChange={(event) => setFooter(event.target.value)}
+          />
+        </label>
+
+        <br />
+
+        <button
+          className="font-mono m-auto bg-gradient-to-r from-energy-100 to-energy-400 hover:from-focus-400 hover:to-focus-100 rounded-md text-white p-4 text-align-center"
+          type="submit"
+        >
+          Create Invoice
+        </button>
+      </div>
     </form>
   );
 }

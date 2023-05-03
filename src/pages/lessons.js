@@ -1,31 +1,32 @@
-
 import useSWR from "swr";
 import LessonOverviewHeader from "Components/LessonsOverview/LessonOverviewHeader";
 import LessonOverviewList from "Components/LessonsOverview/LessonOverviewList";
-import {useState} from "react"
-
-
+import { useState } from "react";
+import InvoiceForm from "Components/InvoicesPage/InvoiceForm";
 
 export default function LessonsPage() {
-  const [selectAll, setSelectAll] = useState (false);
+  const [selectAll, setSelectAll] = useState(false);
+  const [lessonsIds, setLessonsIds] = useState([]);
 
-  
-    
-  
+  function getLessonsIds(ids) {
+    setLessonsIds(ids);
+  }
+
   return (
     <>
-    <h1 className="bg-none p-10 text-center font-mono text-energy-200 text-2xl">
-      YOUR LESSON OVERVIEW
-    </h1>
-    <LessonOverviewHeader handleSelectAll={setSelectAll} selectAll={selectAll}/>
-    <LessonOverviewList selectAllBoxes={selectAll}/>
-    <div>
-     
-
-
-
-    </div>
-  </>
+      <h1 className="bg-none p-10 text-center font-mono text-energy-200 text-2xl">
+        YOUR LESSON OVERVIEW
+      </h1>
+      <LessonOverviewHeader
+        handleSelectAll={setSelectAll}
+        selectAll={selectAll}
+      />
+      <LessonOverviewList
+        selectAllBoxes={selectAll}
+        getLessonsIds={getLessonsIds}
+      />
+      {lessonsIds.length != 0 && <InvoiceForm lessonsIds={lessonsIds} />}
+    </>
   );
 }
 

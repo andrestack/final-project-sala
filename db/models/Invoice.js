@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 const invoiceSchema = new Schema({
   total: { type: Number},
   lessons: [{ type: mongoose.Schema.Types.ObjectId, ref: "Lesson" }],
-  date: { type: String},
+  date: { type: Date, default: Date.now}, // set default as current date
 });
 
 const Invoice =

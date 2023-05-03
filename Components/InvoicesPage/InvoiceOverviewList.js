@@ -1,6 +1,8 @@
 import useSWR from "swr";
 import { useState } from "react";
 import ButtonOpenInvoiceForm from "Components/Buttons/ButtonOpenInvoiceForm";
+import InvoiceForm from "./InvoiceForm";
+import useLocalStorageState from "use-local-storage-state"
 
 // import useCheckBoxStore from "utils/useCheckBoxStore";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -10,7 +12,7 @@ export default function InvoiceOverviewList({ selectAllBoxes }) {
     fallbackData: [],
   });
 
-  // console.log(data);
+  console.log(data);
 
   const filteredData = data.filter((lesson) =>
     lesson.isInvoiced ? lesson : null
@@ -32,11 +34,12 @@ export default function InvoiceOverviewList({ selectAllBoxes }) {
     );
   }
 
-  async function handleSubmitInvoices(event) {
+  async function handleGenerateInvoices(event) {
+    
     event.preventDefault();
     const formData = new FormData(event.target);
     const lessonData = Object.fromEntries(formData);
-    console.log("here", lessonData);
+    
 
     // create a POST to api
     const url = `/api/invoice`;
@@ -54,7 +57,7 @@ export default function InvoiceOverviewList({ selectAllBoxes }) {
   }
 
   return (
-    <form onSubmit={handleSubmitInvoices}>
+    <form onSubmit={handleGenerateInvoices}>
       <div role="list" className="text-center font-mono mt-6">
         {filteredData.map((lesson) => {
           const duration = lesson.endTime - lesson.startTime;
@@ -83,7 +86,17 @@ export default function InvoiceOverviewList({ selectAllBoxes }) {
             </div>
           );
         })}
-<ButtonOpenInvoiceForm/>
+
+<button
+        name="button"
+        className="font-mono m-auto bg-gradient-to-r from-energy-100 to-energy-400 hover:from-focus-400 hover:to-focus-100 rounded-md text-white p-4 text-align-center"
+        // onClick={toggleVisibility}
+      >
+        Add to Invoice
+      </button>
+
+        <InvoiceForm/>
+{/* <ButtonOpenInvoiceForm/> */}
         {/* <button
           className="font-mono m-auto bg-gradient-to-r from-energy-100 to-energy-400 hover:from-focus-400 hover:to-focus-100 rounded-md text-white p-4 text-align-center"
           type="submit"

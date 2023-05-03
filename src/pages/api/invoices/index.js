@@ -2,27 +2,35 @@ import dbConnect from "db/connect";
 import Invoice from "db/models/Invoice";
 import Lesson from "db/models/Lesson";
 
+async function markLessonAsInvoiced(id) {
+  const lessonData = await Lesson.findByIdAndUpdate(id, {
+    isInvoiced: true,
+  });
+
+  lessonData.save();
+}
+
 export default async function handler(request, response) {
   await dbConnect();
+  const date = new Date().toLocaleDateString();
 
   if (request.method === "POST") {
     try {
       const invoiceData = request.body;
-      console.log(invoiceData)
-
-      async function createInvoiceFromLesson(id) {
-        const lessonData = await Lesson.findByIdAndUpdate(id, {
-          isInvoiced: true,
-        });
-     
-        lessonData.save();
-      }
+      console.log(invoiceData);
 
       invoiceData.forEach((data) => {
-        createInvoiceFromLesson(data);
+        markLessonAsInvoiced(data);
       });
+      const total = 100;
+      const invoiceToCreate = await Invoice.create({
+        total,
+        date,
+        lessons: invoiceData,
+      });
+      
 
-      response.status(201).json({ status: "Invoice info submitted" });
+      response.status(201).json(invoiceToCreate).populate("lessons");
     } catch (error) {
       console.log(error);
 
@@ -30,14 +38,27 @@ export default async function handler(request, response) {
     }
   }
 
-  // if (request.method === "GET") {
-  //   const invoices = await Invoice.find();
- 
-  //   return response.status(200).json(invoices);
-  // } else {
-  //   return response.status(405).json({ message: "Method not allowed" });
-  // }
+  if (request.method === "GET") {
+    const invoices = await Invoice.find();
+    console.log(invoices);
+    return response.status(200).json(invoices);
+  } else {
+    return response.status(405).json({ message: "Method not allowed" });
+  }
 }
+
+// Need to calculate the total € - do this inside the forEach
+// Create a new invoice, need to pass in to it the array of ids and the total,
+// invoice needs to be populated with the lesson data
+// return response with the new invoice object and populate with
+
+// if (request.method === "GET") {
+//   const invoices = await Invoice.find();
+
+//   return response.status(200).json(invoices);
+// } else {
+//   return response.status(405).json({ message: "Method not allowed" });
+// }
 
 /*
 

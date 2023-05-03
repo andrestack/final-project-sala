@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import ButtonOpenJitsi from "../../Components/Buttons/ButtonOpenJitsi";
+import ButtonAddCourseCode from "Components/Buttons/ButtonAddCourseCode";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,6 +12,7 @@ export default function Home() {
         {" "}
         WELCOME TO YOUR SALA
       </h1>
+      <ButtonAddCourseCode/>
       <ButtonOpenJitsi />
     </>
   );
