@@ -4,7 +4,7 @@ import { lessonUnits } from "utils/lessonUnits";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-export default function LessonOverviewList({ selectAllBoxes, getLessonsIds }) {
+export default function LessonOverviewList({ selectAllBoxes, getInvoiceInfo }) {
   const { data, isLoading, error } = useSWR("/api/lessons", fetcher, {
     fallbackData: [],
   });
@@ -12,8 +12,6 @@ export default function LessonOverviewList({ selectAllBoxes, getLessonsIds }) {
   const filteredData = data.filter((lesson) =>
     !lesson.isInvoiced ? lesson : null
   );
-
-  
 
   // console.log(filteredData)
   // console.log(filteredData);
@@ -41,11 +39,6 @@ export default function LessonOverviewList({ selectAllBoxes, getLessonsIds }) {
       lessonIds.includes(lesson._id)
     );
 
-    
-
-
-    getLessonsIds(filteredLesson);
-
     // create a POST fetch
     const url = `/api/invoices`;
     const response = await fetch(url, {
@@ -54,10 +47,14 @@ export default function LessonOverviewList({ selectAllBoxes, getLessonsIds }) {
       headers: { "Content-Type": "application/json" },
     });
 
+    const data = await response.json();
+
     if (!response.ok) {
       alert("Could not submit information properly. Please inform the admin");
-    } else {
       console.error(`Error: ${response.status}`);
+    } else {
+      console.log("RESPONSE: ", data);
+      getInvoiceInfo(data);
     }
   }
 

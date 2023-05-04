@@ -14,40 +14,44 @@ export default async function handler(request, response) {
   await dbConnect();
   const date = new Date().toLocaleDateString();
 
+  //   if (request.method === "POST") {
+  //     try {
+  //       const invoiceData = request.body;
+
+  //       invoiceData.forEach((data) => {
+  //         markLessonAsInvoiced(data);
+  //       });
+  //       const total = 100;
+  //       const invoiceToCreate = await Invoice.create({
+  //         total,
+  //         date,
+  //         lessons: invoiceData,
+  //       });
+  //       const populatedInvoice = await Invoice.populate(invoiceToCreate, {
+  //         path: "lessons",
+  //       });
+
+  //       console.log("populate", populatedInvoice);
+
+  //       response.status(201).json(populatedInvoice);
+  //     } catch (error) {
+  //       console.log(error);
+
+  //       response.status(400).json({ error: error.message });
+  //     }
+  //   }
+
   if (request.method === "POST") {
+    // const invoice = await Invoice.findOneAndUpdate(
+    //   { _id: request.body.updatedInvoicesIds },
+    //   { ...request.body.invoiceData }
+    // );
     try {
-      const invoiceData = request.body;
-
-      invoiceData.forEach((data) => {
-        markLessonAsInvoiced(data);
-      });
-      const total = 100;
-      const invoiceToCreate = await Invoice.create({
-        total,
-        date,
-        lessons: invoiceData,
-      });
-      const populatedInvoice = await Invoice.populate(invoiceToCreate, {
-        path: "lessons",
-      });
-
-      console.log("populate", populatedInvoice);
-
-      response.status(201).json(populatedInvoice);
+      console.log("invoice");
+      return response.status(200).json({ invoice: "cool" });
     } catch (error) {
       console.log(error);
-
-      response.status(400).json({ error: error.message });
     }
-  }
-
-  if (request.method === "PATCH") {
-    const invoice = await Invoice.findOneAndUpdate(
-      { _id: request.body.updatedInvoicesIds },
-      { ...request.body.invoiceData }
-    );
-    console.log("invoice", invoice);
-    return response.status(200).json(invoice);
   }
   if (request.method === "GET") {
     const invoices = await Invoice.find();

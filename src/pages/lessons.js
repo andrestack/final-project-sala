@@ -6,10 +6,10 @@ import InvoiceForm from "Components/InvoicesPage/InvoiceForm";
 
 export default function LessonsPage() {
   const [selectAll, setSelectAll] = useState(false);
-  const [lessonsIds, setLessonsIds] = useState([]);
+  const [invoiceInfo, setInvoiceInfo] = useState({});
 
-  function getLessonsIds(ids) {
-    setLessonsIds(ids);
+  function getInvoiceInfo(info) {
+    setInvoiceInfo(info);
   }
 
   return (
@@ -23,10 +23,10 @@ export default function LessonsPage() {
       />
       <LessonOverviewList
         selectAllBoxes={selectAll}
-        getLessonsIds={getLessonsIds}
+        getInvoiceInfo={getInvoiceInfo}
       />
       {/* {lessonsIds.length != 0 &&  */}
-      <InvoiceForm lessonsIds={lessonsIds} />
+      <InvoiceForm invoiceInfo={invoiceInfo} />
     </>
   );
 }

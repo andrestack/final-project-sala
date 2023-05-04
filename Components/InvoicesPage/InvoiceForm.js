@@ -47,8 +47,8 @@ const Textarea = styled.textarea`
   }
 `;
 
-export default function InvoiceForm({ lessonsIds }) {
-  console.log("first", lessonsIds);
+export default function InvoiceForm({ invoiceInfo }) {
+  // console.log("first", invoiceInfo);
 
   const [address, setAddress] = useState("");
   const [bankDetails, setBankDetails] = useState("");
@@ -74,31 +74,39 @@ export default function InvoiceForm({ lessonsIds }) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
-    console.log(formData);
+
     const invoiceData = Object.fromEntries(formData);
 
-    console.log(invoiceData);
+    event.target.reset();
+    event.target.elements.name.focus();
+
+    const updatedInvoicesIds = invoiceInfo._id;
+    
+
+    const url = `/api/invoices/test`;
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify({ updatedInvoicesIds, invoiceData }),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      alert("Could not submit information properly. Please inform the admin");
+    } else {
+      console.error(`Error: ${response.status}`);
+    }
   }
-
-  //   const url = `/api/invoices`;
-  //   const response = await fetch(url, {
-  //     method: "POST",
-  //     body: JSON.stringify(lessonIds),
-  //     headers: { "Content-Type": "application/json" },
-  //   });
-
-  //   if (!response.ok) {
-  //     alert("Could not submit information properly. Please inform the admin");
-  //   } else {
-  //     console.error(`Error: ${response.status}`);
-  //   }
-  // }
 
   // Handle form submission here, e.g. submit data to backend API
   return (
     <FormContainer onSubmit={handleSubmit}>
       <Label>
+        <Input required name="name" placeholder="Your name" />
+      </Label>
+      <Label>
         <Input
+          required
+          name="address"
           placeholder="Your address"
           type="text"
           value={address}
@@ -109,6 +117,8 @@ export default function InvoiceForm({ lessonsIds }) {
 
       <Label>
         <Input
+          required
+          name="IBAN"
           placeholder="Your IBAN"
           type="text"
           value={bankDetails}
@@ -119,6 +129,8 @@ export default function InvoiceForm({ lessonsIds }) {
       <br />
       <Label>
         <Input
+          name="tax number"
+          required
           placeholder="Your Tax Number"
           type="text"
           value={taxID}
@@ -128,6 +140,8 @@ export default function InvoiceForm({ lessonsIds }) {
       <br />
       <Label>
         <Input
+          name="date"
+          required
           type="date"
           value={date}
           onChange={(event) => setDate(event.target.value)}
@@ -156,7 +170,7 @@ export default function InvoiceForm({ lessonsIds }) {
         </label>
       </div>
       <section className="bg-white">
-        {lessonsIds.map((lesson) => {
+        {invoiceInfo.lessons?.map((lesson) => {
           const date = new Date(lesson.startTime).toLocaleDateString();
           const duration = lesson.endTime - lesson.startTime;
           const fee = 25;
@@ -182,6 +196,7 @@ export default function InvoiceForm({ lessonsIds }) {
         <br />
         <Label>
           <Textarea
+            name="text-area"
             placeholder="Other info"
             value={otherInfo}
             onChange={(event) => setOtherInfo(event.target.value)}
@@ -190,6 +205,7 @@ export default function InvoiceForm({ lessonsIds }) {
         <br />
         <Label>
           <Textarea
+            name="footer"
             placeholder="footer"
             value={footer}
             onChange={(event) => setFooter(event.target.value)}
