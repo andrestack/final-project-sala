@@ -10,7 +10,7 @@ export default function ButtonAddCourseCode() {
       <label className="text-lg">
         
         <input
-          placeholder="Enter Your Course Code"
+          placeholder="Course Code"
           type="text"
           className="p-2"
         />

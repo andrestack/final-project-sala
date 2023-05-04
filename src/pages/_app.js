@@ -11,10 +11,9 @@ export default function App({ Component, pageProps }) {
 
   const {data, isLoading, error} = useSWR("api/lessons", fetcher, {fallbackData: [],})
 
-console.log(data);
+
 
 const filteredData = data.filter((lesson) => lesson.isInvoiced)
-console.log(filteredData)
 
   
   return (

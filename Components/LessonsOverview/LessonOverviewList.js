@@ -8,12 +8,14 @@ export default function LessonOverviewList({ selectAllBoxes, getLessonsIds }) {
   const { data, isLoading, error } = useSWR("/api/lessons", fetcher, {
     fallbackData: [],
   });
-  console.log(data);
 
   const filteredData = data.filter((lesson) =>
     !lesson.isInvoiced ? lesson : null
   );
 
+  
+
+  // console.log(filteredData)
   // console.log(filteredData);
 
   if (error) return <h1>ERROR</h1>;
@@ -33,25 +35,30 @@ export default function LessonOverviewList({ selectAllBoxes, getLessonsIds }) {
     const formData = new FormData(event.target);
     const lessonData = Object.fromEntries(formData);
 
-    console.log();
-
     const lessonIds = buildLessonIds(lessonData);
 
-    getLessonsIds(lessonIds);
+    const filteredLesson = filteredData.filter((lesson) =>
+      lessonIds.includes(lesson._id)
+    );
+
+    
+
+
+    getLessonsIds(filteredLesson);
 
     // create a POST fetch
-    // const url = `/api/invoices`;
-    // const response = await fetch(url, {
-    //   method: "POST",
-    //   body: JSON.stringify(lessonIds),
-    //   headers: { "Content-Type": "application/json" },
-    // });
+    const url = `/api/invoices`;
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(filteredLesson),
+      headers: { "Content-Type": "application/json" },
+    });
 
-    // if (!response.ok) {
-    //   alert("Could not submit information properly. Please inform the admin");
-    // } else {
-    //   console.error(`Error: ${response.status}`);
-    // }
+    if (!response.ok) {
+      alert("Could not submit information properly. Please inform the admin");
+    } else {
+      console.error(`Error: ${response.status}`);
+    }
   }
 
   /* create a POST route 

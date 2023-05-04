@@ -25,7 +25,8 @@ export default function LessonsPage() {
         selectAllBoxes={selectAll}
         getLessonsIds={getLessonsIds}
       />
-      {lessonsIds.length != 0 && <InvoiceForm lessonsIds={lessonsIds} />}
+      {/* {lessonsIds.length != 0 &&  */}
+      <InvoiceForm lessonsIds={lessonsIds} />
     </>
   );
 }

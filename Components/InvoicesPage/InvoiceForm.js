@@ -1,27 +1,83 @@
 import { useState } from "react";
 import useSWR from "swr";
+import styled from "styled-components";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
+const FormContainer = styled.form`
+  display: grid;
+  gap: 0.5rem;
+  background-color: #b4c7a8;
+  @media (max-width: 390px) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 15rem;
+  }
+`;
+
+const Label = styled.label`
+  font-weight: bold;
+  @media (max-width: 390px) {
+    margin-top: 1rem;
+  }
+`;
+
+const Input = styled.input`
+  padding: 0.5rem;
+  font-size: inherit;
+  border: 1px solid black;
+  background-color: #b4c7a8;
+  border-radius: 0.3rem;
+  font-size: 1rem;
+  @media (max-width: 390px) {
+    width: 15rem;
+  }
+`;
+
+const Textarea = styled.textarea`
+  adding: 0.5rem;
+  font-size: inherit;
+  border: 1px solid black;
+  background-color: #b4c7a8;
+  border-radius: 0.3rem;
+  font-size: 1rem;
+  @media (max-width: 390px) {
+    width: 15rem;
+  }
+`;
+
 export default function InvoiceForm({ lessonsIds }) {
-  console.log("LESSONS IN INVOICE: ", lessonsIds);
+  console.log("first", lessonsIds);
+
   const [address, setAddress] = useState("");
   const [bankDetails, setBankDetails] = useState("");
   const [taxID, setTaxID] = useState("");
   const [date, setDate] = useState(new Date());
-  const [mainSectionData, setMainSectionData] = useState("");
   const [otherInfo, setOtherInfo] = useState("");
   const [footer, setFooter] = useState("");
 
-  // const { data, isLoading, error } = useSWR("/api/invoices", fetcher, {
-  //   fallbackData: [],
-  // });
-  // if (error) return <h1>ERROR</h1>;
-  // if (isLoading) return <h1>Is isLoading</h1>;
-  // console.log(data);
+  function millisToMinutesAndSeconds(millis) {
+    var minutes = Math.floor(millis / 60000);
+    var seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+  }
+
+  // function lessonUnitsAndFee(millis, fee) {
+  //   return (
+  //     (millis < 2700000 ? 0 : millis <= 4800000 && millis > 2700000 ? 1 : 2) *
+  //     fee
+  //   );
+  // }
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+    const formData = new FormData(event.target);
+    console.log(formData);
+    const invoiceData = Object.fromEntries(formData);
+
+    console.log(invoiceData);
   }
 
   //   const url = `/api/invoices`;
@@ -40,71 +96,105 @@ export default function InvoiceForm({ lessonsIds }) {
 
   // Handle form submission here, e.g. submit data to backend API
   return (
-    <form className="" onSubmit={handleSubmit}>
-      <label>
-        <input
+    <FormContainer onSubmit={handleSubmit}>
+      <Label>
+        <Input
           placeholder="Your address"
           type="text"
           value={address}
           onChange={(event) => setAddress(event.target.value)}
         />
-      </label>
+      </Label>
       <br />
 
-      <label>
-        <input
+      <Label>
+        <Input
           placeholder="Your IBAN"
           type="text"
           value={bankDetails}
           onChange={(event) => setBankDetails(event.target.value)}
         />
-      </label>
+      </Label>
 
       <br />
-      <label>
-        <input
+      <Label>
+        <Input
           placeholder="Your Tax Number"
           type="text"
           value={taxID}
           onChange={(event) => setTaxID(event.target.value)}
         />
-      </label>
+      </Label>
       <br />
-      <label>
-        <input
+      <Label>
+        <Input
           type="date"
           value={date}
           onChange={(event) => setDate(event.target.value)}
         />
-      </label>
+      </Label>
       <br />
 
-      <div className="h-7 my-2 grid grid-cols-6 justify-center text-white text-sm">
-        <>
-          <label>test</label>
-          <label>test</label>
-          <label>test</label>
-          <label>test</label>
-          <label>test</label>
-          <label>test</label>
-        </>
+      <div className="text-sm mt-6 grid grid-cols-6 content-around bg-white h-8">
+        <label className="text-center font-mono" htmlFor="Date">
+          Date
+        </label>
+        <label className="text-center font-mono" htmlFor="Course">
+          Course
+        </label>
+        <label className="text-center font-mono" htmlFor="End Time">
+          Duration
+        </label>
+        <label className="text-center font-mono" htmlFor="Units">
+          Units
+        </label>
+        <label className="text-center font-mono" htmlFor="Units">
+          €/Unit
+        </label>
+        <label className="text-center font-mono" htmlFor="Total">
+          €/Total
+        </label>
+      </div>
+      <section className="bg-white">
+        {lessonsIds.map((lesson) => {
+          const date = new Date(lesson.startTime).toLocaleDateString();
+          const duration = lesson.endTime - lesson.startTime;
+          const fee = 25;
+          return (
+            <div
+              key={lesson._id}
+              className="bg-white grid grid-cols-6 content-around text-center"
+            >
+              <Label htmlFor="date">{date}</Label>
+              <Label htmlFor="course-code"></Label>
+              <Label htmlFor="duration">
+                {millisToMinutesAndSeconds(duration)}
+              </Label>
+              <Label>{lesson.unitTotal}</Label>
+              <Label>{fee}</Label>
+              <Label htmlFor="total">{lesson.unitTotal * fee}</Label>
+            </div>
+          );
+        })}
+      </section>
 
+      <div>
         <br />
-        <label>
-          <textarea
+        <Label>
+          <Textarea
             placeholder="Other info"
             value={otherInfo}
             onChange={(event) => setOtherInfo(event.target.value)}
           />
-        </label>
+        </Label>
         <br />
-        <label>
-          <textarea
+        <Label>
+          <Textarea
             placeholder="footer"
             value={footer}
             onChange={(event) => setFooter(event.target.value)}
           />
-        </label>
+        </Label>
 
         <br />
 
@@ -115,6 +205,41 @@ export default function InvoiceForm({ lessonsIds }) {
           Create Invoice
         </button>
       </div>
-    </form>
+    </FormContainer>
   );
 }
+
+/*
+
+<div className="text-xl mt-6 grid grid-cols-7 content-around bg-gradient-to-r from-energy-100 to-energy-400 h-10">
+      <input
+        type="checkbox"
+        name="selectAll"
+        onChange={() => handleSelectAll(!selectAll)}
+        checked={selectAll}
+      ></input>
+
+      <label className="text-center font-mono" htmlFor="Date">
+        Date
+      </label>
+
+      <label className="text-center font-mono" htmlFor="Course">
+        Course
+      </label>
+      <label className="text-center font-mono" htmlFor="End Time">
+        Duration
+      </label>
+      <label className="text-center font-mono" htmlFor="Units">
+        Units
+      </label>
+      <label className="text-center font-mono" htmlFor="Units">
+        €/Unit
+      </label>
+      <label className="text-center font-mono" htmlFor="Total">
+        €/Total
+      </label>
+    </div>
+
+
+
+*/

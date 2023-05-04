@@ -95,7 +95,6 @@ export default function InvoiceOverviewList({ selectAllBoxes }) {
         Add to Invoice
       </button>
 
-        <InvoiceForm/>
 {/* <ButtonOpenInvoiceForm/> */}
         {/* <button
           className="font-mono m-auto bg-gradient-to-r from-energy-100 to-energy-400 hover:from-focus-400 hover:to-focus-100 rounded-md text-white p-4 text-align-center"

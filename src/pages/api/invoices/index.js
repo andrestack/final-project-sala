@@ -17,7 +17,7 @@ export default async function handler(request, response) {
   if (request.method === "POST") {
     try {
       const invoiceData = request.body;
-      console.log(invoiceData);
+      
 
       invoiceData.forEach((data) => {
         markLessonAsInvoiced(data);
@@ -28,9 +28,13 @@ export default async function handler(request, response) {
         date,
         lessons: invoiceData,
       });
-      
+      const populatedInvoice = await Invoice.populate(invoiceToCreate, {
+        path: "lessons",
+      });
 
-      response.status(201).json(invoiceToCreate).populate("lessons");
+      console.log("populate", populatedInvoice);
+
+      response.status(201).json(populatedInvoice);
     } catch (error) {
       console.log(error);
 
@@ -40,7 +44,7 @@ export default async function handler(request, response) {
 
   if (request.method === "GET") {
     const invoices = await Invoice.find();
-    console.log(invoices);
+   
     return response.status(200).json(invoices);
   } else {
     return response.status(405).json({ message: "Method not allowed" });
