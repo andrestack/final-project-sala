@@ -5,6 +5,8 @@ import { lessonUnits } from "utils/lessonUnits";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function LessonOverviewList({ selectAllBoxes, getInvoiceInfo }) {
+  console.log()
+  
   const { data, isLoading, error } = useSWR("/api/lessons", fetcher, {
     fallbackData: [],
   });
@@ -13,7 +15,7 @@ export default function LessonOverviewList({ selectAllBoxes, getInvoiceInfo }) {
     !lesson.isInvoiced ? lesson : null
   );
 
-  // console.log(filteredData)
+  console.log(filteredData)
   // console.log(filteredData);
 
   if (error) return <h1>ERROR</h1>;
@@ -39,7 +41,9 @@ export default function LessonOverviewList({ selectAllBoxes, getInvoiceInfo }) {
       lessonIds.includes(lesson._id)
     );
 
-    // create a POST fetch
+    // Create a POST request to the invoices route
+    
+    
     const url = `/api/invoices`;
     const response = await fetch(url, {
       method: "POST",

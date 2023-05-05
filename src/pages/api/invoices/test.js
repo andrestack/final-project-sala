@@ -10,6 +10,8 @@ async function markLessonAsInvoiced(id) {
   lessonData.save();
 }
 
+
+
 export default async function handler(request, response) {
   await dbConnect();
   const date = new Date().toLocaleDateString();

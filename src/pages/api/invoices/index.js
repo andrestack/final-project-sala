@@ -12,11 +12,16 @@ async function markLessonAsInvoiced(id) {
 
 export default async function handler(request, response) {
   await dbConnect();
+  const { _id } = request.query;
+
   const date = new Date().toLocaleDateString();
 
   if (request.method === "POST") {
     try {
       const invoiceData = request.body;
+
+  //Create a forEach loop to add up the total of the units and fee
+  
 
       invoiceData.forEach((data) => {
         markLessonAsInvoiced(data);
@@ -31,30 +36,30 @@ export default async function handler(request, response) {
         path: "lessons",
       });
 
-      console.log("populate", populatedInvoice);
-
-      response.status(201).json(populatedInvoice);
+      // console.log("populate", populatedInvoice);
+      return response.status(201).json(populatedInvoice);
     } catch (error) {
       console.log(error);
 
       response.status(400).json({ error: error.message });
     }
   }
-
   if (request.method === "PATCH") {
-    const invoice = await Invoice.findOneAndUpdate(
-      { _id: request.body.updatedInvoicesIds },
-      { ...request.body.invoiceData }
-    );
-    console.log("invoice", invoice);
-    return response.status(200).json(invoice);
-  }
-  if (request.method === "GET") {
-    const invoices = await Invoice.find();
+    console.log(request.body);
+    try {
+      const invoiceToUpdate = await Invoice.findByIdAndUpdate(
+        request.body.updatedInvoicesIds,
+        request.body.invoiceData,
+        { new: true }
+      );
+      const populatedUpdateInvoices = await Invoice.populate(invoiceToUpdate, {
+        path: "lessons",
+      });
 
-    return response.status(200).json(invoices);
-  } else {
-    return response.status(405).json({ message: "Method not allowed" });
+      return response.status(200).json(populatedUpdateInvoices);
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 

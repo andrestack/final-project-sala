@@ -48,7 +48,7 @@ const Textarea = styled.textarea`
 `;
 
 export default function InvoiceForm({ invoiceInfo }) {
-  // console.log("first", invoiceInfo);
+  console.log("first", invoiceInfo);
 
   const [address, setAddress] = useState("");
   const [bankDetails, setBankDetails] = useState("");
@@ -81,19 +81,20 @@ export default function InvoiceForm({ invoiceInfo }) {
     event.target.elements.name.focus();
 
     const updatedInvoicesIds = invoiceInfo._id;
-    
 
-    const url = `/api/invoices/test`;
+    const url = `/api/invoices`;
     const response = await fetch(url, {
-      method: "POST",
+      method: "PATCH",
       body: JSON.stringify({ updatedInvoicesIds, invoiceData }),
       headers: { "Content-Type": "application/json" },
     });
 
     if (!response.ok) {
       alert("Could not submit information properly. Please inform the admin");
-    } else {
       console.error(`Error: ${response.status}`);
+    } else {
+      console.log("RESPONSE FROM PATCH ", await response.json())
+      // console.error(`Error: ${response.status}`);
     }
   }
 
