@@ -16,12 +16,16 @@ export default async function handler(request, response) {
 
   const date = new Date().toLocaleDateString();
 
+  if (request.method === "GET") {
+    const invoice = await Invoice.find();
+    response.status(200).json(invoice);
+  }
+
   if (request.method === "POST") {
     try {
       const invoiceData = request.body;
 
-  //Create a forEach loop to add up the total of the units and fee
-  
+      //Create a forEach loop to add up the total of the units and fee
 
       invoiceData.forEach((data) => {
         markLessonAsInvoiced(data);

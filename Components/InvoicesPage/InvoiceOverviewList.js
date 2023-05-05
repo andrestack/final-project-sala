@@ -7,8 +7,8 @@ import useLocalStorageState from "use-local-storage-state"
 // import useCheckBoxStore from "utils/useCheckBoxStore";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-export default function InvoiceOverviewList({ selectAllBoxes }) {
-  const { data, isLoading, error } = useSWR("/api/lessons", fetcher, {
+export default function InvoiceOverviewList({ selectAllBoxes, toggleForm }) {
+  const { data, isLoading, error } = useSWR("/api/invoices", fetcher, {
     fallbackData: [],
   });
 
@@ -90,7 +90,7 @@ export default function InvoiceOverviewList({ selectAllBoxes }) {
 <button
         name="button"
         className="font-mono m-auto bg-gradient-to-r from-energy-100 to-energy-400 hover:from-focus-400 hover:to-focus-100 rounded-md text-white p-4 text-align-center"
-        // onClick={toggleVisibility}
+        onClick={toggleVisibility}
       >
         Add to Invoice
       </button>

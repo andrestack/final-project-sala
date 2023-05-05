@@ -4,7 +4,7 @@ import { lessonUnits } from "utils/lessonUnits";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-export default function LessonOverviewList({ selectAllBoxes, getInvoiceInfo }) {
+export default function LessonOverviewList({ selectAllBoxes, getInvoiceInfo, handleToggleForm }) {
   console.log()
   
   const { data, isLoading, error } = useSWR("/api/lessons", fetcher, {
@@ -32,7 +32,7 @@ export default function LessonOverviewList({ selectAllBoxes, getInvoiceInfo }) {
   async function handleAddToInvoices(event) {
     event.preventDefault();
 
-    const formData = new FormData(event.target);
+    const formData = new FormData(document.getElementById("form"));
     const lessonData = Object.fromEntries(formData);
 
     const lessonIds = buildLessonIds(lessonData);
@@ -42,7 +42,7 @@ export default function LessonOverviewList({ selectAllBoxes, getInvoiceInfo }) {
     );
 
     // Create a POST request to the invoices route
-    
+    handleToggleForm()
     
     const url = `/api/invoices`;
     const response = await fetch(url, {
@@ -80,7 +80,7 @@ POST findbyid
   }
 
   return (
-    <form onSubmit={handleAddToInvoices}>
+    <form id="form" onSubmit={handleAddToInvoices}>
       <div role="list" className="text-center font-mono mt-6">
         {filteredData.map((lesson) => {
           const duration = lesson.endTime - lesson.startTime;
@@ -113,6 +113,7 @@ POST findbyid
         <button
           className="font-mono m-auto bg-gradient-to-r from-energy-100 to-energy-400 hover:from-focus-400 hover:to-focus-100 rounded-md text-white p-4 text-align-center"
           type="submit"
+          onClick={handleAddToInvoices}
         >
           Add to Invoice
         </button>

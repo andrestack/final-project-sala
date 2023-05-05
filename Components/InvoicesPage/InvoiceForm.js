@@ -47,7 +47,7 @@ const Textarea = styled.textarea`
   }
 `;
 
-export default function InvoiceForm({ invoiceInfo }) {
+export default function InvoiceForm({ invoiceInfo, isFormOpen }) {
   console.log("first", invoiceInfo);
 
   const [address, setAddress] = useState("");
@@ -56,6 +56,16 @@ export default function InvoiceForm({ invoiceInfo }) {
   const [date, setDate] = useState(new Date());
   const [otherInfo, setOtherInfo] = useState("");
   const [footer, setFooter] = useState("");
+
+ 
+
+  const obj = invoiceInfo.lessons;
+  
+
+  let unitTotalSum = 0;
+  obj?.forEach((lesson) => (unitTotalSum += lesson.unitTotal));
+  console.log("total", unitTotalSum);
+
 
   function millisToMinutesAndSeconds(millis) {
     var minutes = Math.floor(millis / 60000);
@@ -93,13 +103,15 @@ export default function InvoiceForm({ invoiceInfo }) {
       alert("Could not submit information properly. Please inform the admin");
       console.error(`Error: ${response.status}`);
     } else {
-      console.log("RESPONSE FROM PATCH ", await response.json())
+      console.log("RESPONSE FROM PATCH ", await response.json());
       // console.error(`Error: ${response.status}`);
     }
   }
 
   // Handle form submission here, e.g. submit data to backend API
   return (
+    <div >
+      <div >
     <FormContainer onSubmit={handleSubmit}>
       <Label>
         <Input required name="name" placeholder="Your name" />
@@ -192,6 +204,28 @@ export default function InvoiceForm({ invoiceInfo }) {
           );
         })}
       </section>
+      
+      
+      <div className="text-sm mt-6 grid grid-cols-6 content-around bg-white h-8">
+      <label className="text-center font-mono" htmlFor="Date">
+          
+        </label>
+        <label className="text-center font-mono" htmlFor="Course">
+          
+        </label>
+        <label className="text-center font-mono" htmlFor="Duration">
+          
+        </label>
+        <label className="text-center font-mono" htmlFor="total-units">
+          {unitTotalSum}
+        </label>
+        <label className="text-center font-mono" htmlFor="Euro-unit">
+          
+        </label>
+        <label className="text-center font-mono" htmlFor="total-euro">
+          {unitTotalSum * 25}
+        </label>
+      </div>
 
       <div>
         <br />
@@ -223,40 +257,22 @@ export default function InvoiceForm({ invoiceInfo }) {
         </button>
       </div>
     </FormContainer>
-  );
-}
-
-/*
-
-<div className="text-xl mt-6 grid grid-cols-7 content-around bg-gradient-to-r from-energy-100 to-energy-400 h-10">
-      <input
-        type="checkbox"
-        name="selectAll"
-        onChange={() => handleSelectAll(!selectAll)}
-        checked={selectAll}
-      ></input>
-
-      <label className="text-center font-mono" htmlFor="Date">
-        Date
-      </label>
-
-      <label className="text-center font-mono" htmlFor="Course">
-        Course
-      </label>
-      <label className="text-center font-mono" htmlFor="End Time">
-        Duration
-      </label>
-      <label className="text-center font-mono" htmlFor="Units">
-        Units
-      </label>
-      <label className="text-center font-mono" htmlFor="Units">
-        €/Unit
-      </label>
-      <label className="text-center font-mono" htmlFor="Total">
-        €/Total
-      </label>
+    </div>
     </div>
 
 
 
-*/
+
+
+     
+
+      
+
+      
+      
+      
+      
+    
+  );
+}
+

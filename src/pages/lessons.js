@@ -3,10 +3,16 @@ import LessonOverviewHeader from "Components/LessonsOverview/LessonOverviewHeade
 import LessonOverviewList from "Components/LessonsOverview/LessonOverviewList";
 import { useState } from "react";
 import InvoiceForm from "Components/InvoicesPage/InvoiceForm";
+import ButtonOpenInvoiceForm from "Components/Buttons/ButtonOpenInvoiceForm";
 
 export default function LessonsPage() {
   const [selectAll, setSelectAll] = useState(false);
   const [invoiceInfo, setInvoiceInfo] = useState({});
+  const [isFormOpen, setFormOpen] = useState(false);
+
+  const handleToggleForm = () => {
+    setFormOpen(!isFormOpen);
+  };
 
   function getInvoiceInfo(info) {
     setInvoiceInfo(info);
@@ -24,17 +30,32 @@ export default function LessonsPage() {
       <LessonOverviewList
         selectAllBoxes={selectAll}
         getInvoiceInfo={getInvoiceInfo}
+        handleToggleForm={handleToggleForm}
       />
+      {/* <ButtonOpenInvoiceForm handleToggleForm={handleToggleForm}/> */}
       {/* {lessonsIds.length != 0 &&  */}
-      <InvoiceForm invoiceInfo={invoiceInfo} />
+
+      {/* <div className="absolute right-0 top-0 h-screen w-1/2 bg-white"> */}
+        <div
+          className={`transform transition-transform duration-500 ease-in ${
+            isFormOpen ? "translate-x-100" : "translate-x-full"
+          } bg-white h-full w-1/2}`}
+        >
+          <InvoiceForm invoiceInfo={invoiceInfo} />
+        </div>
+      {/* </div> */}
     </>
   );
 }
-
-/*
-      
-      <Label htmlFor="name">Name</Label>
-           /* <Input
+{
+  /* /* transform: translateX(100%);
+    transition: all 0.35s ease-in;*/
+  /*
+     
+ {/* {isFormOpen &&()}}*/
+}
+/* Label htmlFor="name">Name</>
+          <Input
               id="name"
               name="name"
               type="text"
