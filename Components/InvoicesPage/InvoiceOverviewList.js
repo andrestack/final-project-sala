@@ -40,6 +40,7 @@ export default function InvoiceOverviewList({ selectAllBoxes, toggleForm }) {
     const formData = new FormData(event.target);
     const lessonData = Object.fromEntries(formData);
     
+    
 
     // create a POST to api
     const url = `/api/invoice`;

@@ -5,7 +5,7 @@ import { lessonUnits } from "utils/lessonUnits";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function LessonOverviewList({ selectAllBoxes, getInvoiceInfo, handleToggleForm }) {
-  console.log()
+  
   
   const { data, isLoading, error } = useSWR("/api/lessons", fetcher, {
     fallbackData: [],
@@ -61,17 +61,6 @@ export default function LessonOverviewList({ selectAllBoxes, getInvoiceInfo, han
       getInvoiceInfo(data);
     }
   }
-
-  /* create a POST route 
-
-*/
-
-  /*
-POST request an neues Schema "invoices" mit allen overview
-POST findbyid
-
-
-*/
 
   function millisToMinutesAndSeconds(millis) {
     var minutes = Math.floor(millis / 60000);

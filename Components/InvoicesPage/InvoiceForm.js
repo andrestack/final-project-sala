@@ -56,11 +56,11 @@ export default function InvoiceForm({ invoiceInfo, isFormOpen }) {
   const [otherInfo, setOtherInfo] = useState("");
   const [footer, setFooter] = useState("");
 
-  const obj = invoiceInfo.lessons;
+  const allTotal = invoiceInfo.total;
 
-  let unitTotalSum = 0;
-  obj?.forEach((lesson) => (unitTotalSum += lesson.unitTotal));
-  console.log("total", unitTotalSum);
+  // let unitTotalSum = 0;
+  // obj?.forEach((lesson) => (unitTotalSum += lesson.unitTotal));
+  // console.log("total", unitTotalSum);
 
   function millisToMinutesAndSeconds(millis) {
     var minutes = Math.floor(millis / 60000);
@@ -217,14 +217,14 @@ export default function InvoiceForm({ invoiceInfo, isFormOpen }) {
             <label className="text-center font-mono" htmlFor="Course"></label>
             <label className="text-center font-mono" htmlFor="Duration"></label>
             <label className="text-center font-mono" htmlFor="total-units">
-              {unitTotalSum}
+              {allTotal}
             </label>
             <label
               className="text-center font-mono"
               htmlFor="Euro-unit"
             ></label>
             <label className="text-center font-mono" htmlFor="total-euro">
-              {unitTotalSum * 25}
+              {allTotal * 25}
             </label>
           </div>
 
