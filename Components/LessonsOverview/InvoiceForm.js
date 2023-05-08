@@ -45,7 +45,7 @@ const Textarea = styled.textarea`
   }
 `;
 
-export default function InvoiceForm({ invoiceInfo, isFormOpen }) {
+export default function InvoiceForm({ invoiceInfo }) {
   console.log("first", invoiceInfo);
 
   const [address, setAddress] = useState("");
@@ -53,14 +53,10 @@ export default function InvoiceForm({ invoiceInfo, isFormOpen }) {
   const [bankDetails, setBankDetails] = useState("");
   const [taxID, setTaxID] = useState("");
   const [date, setDate] = useState(new Date());
-  const [otherInfo, setOtherInfo] = useState("");
+  const [textArea, setTextArea] = useState("");
   const [footer, setFooter] = useState("");
 
   const allTotal = invoiceInfo.total;
-
-  // let unitTotalSum = 0;
-  // obj?.forEach((lesson) => (unitTotalSum += lesson.unitTotal));
-  // console.log("total", unitTotalSum);
 
   function millisToMinutesAndSeconds(millis) {
     var minutes = Math.floor(millis / 60000);
@@ -68,23 +64,12 @@ export default function InvoiceForm({ invoiceInfo, isFormOpen }) {
     return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
   }
 
-  // function lessonUnitsAndFee(millis, fee) {
-  //   return (
-  //     (millis < 2700000 ? 0 : millis <= 4800000 && millis > 2700000 ? 1 : 2) *
-  //     fee
-  //   );
-  // }
-
   async function handleSubmit(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
 
     const invoiceData = Object.fromEntries(formData);
-
-    event.target.reset();
-    event.target.elements.name.focus();
-
     const updatedInvoicesIds = invoiceInfo._id;
 
     const url = `/api/invoices`;
@@ -126,7 +111,7 @@ export default function InvoiceForm({ invoiceInfo, isFormOpen }) {
           <Label>
             <Input
               required
-              name="invoice-number"
+              name="invoiceNumber"
               placeholder="Your invoice number"
               type="text"
               value={invoiceNumber}
@@ -149,7 +134,7 @@ export default function InvoiceForm({ invoiceInfo, isFormOpen }) {
           <br />
           <Label>
             <Input
-              name="tax number"
+              name="taxNumber"
               required
               placeholder="Your Tax Number"
               type="text"
@@ -232,10 +217,10 @@ export default function InvoiceForm({ invoiceInfo, isFormOpen }) {
             <br />
             <Label>
               <Textarea
-                name="text-area"
+                name="textArea"
                 placeholder="Other info"
-                value={otherInfo}
-                onChange={(event) => setOtherInfo(event.target.value)}
+                value={textArea}
+                onChange={(event) => setTextArea(event.target.value)}
               />
             </Label>
             <br />

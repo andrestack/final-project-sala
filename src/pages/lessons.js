@@ -2,7 +2,7 @@ import useSWR from "swr";
 import LessonOverviewHeader from "Components/LessonsOverview/LessonOverviewHeader";
 import LessonOverviewList from "Components/LessonsOverview/LessonOverviewList";
 import { useState } from "react";
-import InvoiceForm from "Components/InvoicesPage/InvoiceForm";
+import InvoiceForm from "Components/LessonsOverview/InvoiceForm";
 import ButtonOpenInvoiceForm from "Components/Buttons/ButtonOpenInvoiceForm";
 
 export default function LessonsPage() {
@@ -36,13 +36,13 @@ export default function LessonsPage() {
       {/* {lessonsIds.length != 0 &&  */}
 
       {/* <div className="absolute right-0 top-0 h-screen w-1/2 bg-white"> */}
-        <div
-          className={`transform transition-transform duration-500 ease-in ${
-            isFormOpen ? "translate-x-100" : "translate-x-full"
-          } bg-white h-full w-1/2}`}
-        >
-          <InvoiceForm invoiceInfo={invoiceInfo} />
-        </div>
+      <div
+        className={`transform transition-transform duration-500 ease-in ${
+          isFormOpen ? "translate-x-100" : "translate-x-full"
+        } bg-white h-full w-1/2}`}
+      >
+        <InvoiceForm invoiceInfo={invoiceInfo} />
+      </div>
       {/* </div> */}
     </>
   );

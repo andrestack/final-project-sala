@@ -1,7 +1,7 @@
 import useButtonStore from "../../utils/useButtonStore";
-import InvoiceForm from "Components/InvoicesPage/InvoiceForm"
+import InvoiceForm from "Components/LessonsOverview/InvoiceForm";
 
-export default function ButtonOpenInvoiceForm({handleToggleForm}) {
+export default function ButtonOpenInvoiceForm({ handleToggleForm }) {
   const isVisible = useButtonStore((state) => state.isVisible);
   const toggleVisibility = useButtonStore((state) => state.toggleVisibility);
 

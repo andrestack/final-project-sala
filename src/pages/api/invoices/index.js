@@ -61,7 +61,7 @@ export default async function handler(request, response) {
     }
   }
   if (request.method === "PATCH") {
-    console.log(request.body);
+    console.log("patch body", request.body);
     try {
       const invoiceToUpdate = await Invoice.findByIdAndUpdate(
         request.body.updatedInvoicesIds,

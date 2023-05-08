@@ -10,9 +10,10 @@ const invoiceSchema = new Schema({
   name: { type: String },
   address: { type: String },
   IBAN: { type: String },
-  "tax number": { type: String },
-  "text-area": { type: String },
+  taxNumber: { type: String },
+  textArea: { type: String },
   footer: { type: String },
+  invoiceNumber: {type: String}
 });
 
 const Invoice =
