@@ -99,7 +99,7 @@ POST findbyid
                 checked={selectAllBoxes ? "checked" : null}
               ></input>
               <label htmlFor="date">{date}</label>
-              <label htmlFor="course-code"></label>
+              <label htmlFor="course-code">{lesson.courseCode}</label>
               <label htmlFor="duration">
                 {millisToMinutesAndSeconds(duration)}
               </label>

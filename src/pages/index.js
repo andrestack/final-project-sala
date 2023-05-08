@@ -13,7 +13,7 @@ export default function Home() {
         WELCOME TO YOUR SALA
       </h1>
       <ButtonAddCourseCode/>
-      <ButtonOpenJitsi />
+    
     </>
   );
 }

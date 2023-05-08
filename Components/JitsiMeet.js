@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 
-export default function JitsiMeet() {
+export default function JitsiMeet({courseCode}) {
   const jitsiContainer = useRef(null);
   const jitsiApi = useRef(null);
 
@@ -45,6 +45,7 @@ export default function JitsiMeet() {
       const url = `/api/${options.roomName}/start-unit`;
       const response = await fetch(url, {
         method: "POST",
+        body: JSON.stringify({ courseCode }),
 
         headers: {
           "Content-Type": "application/json",

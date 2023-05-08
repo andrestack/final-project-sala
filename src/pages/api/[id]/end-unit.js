@@ -25,23 +25,8 @@ export default async function handler(request, response) {
       return response.status(404).json({ status: "Not found" });
   }
 }
-/*
- const { id: jitsiId } = request.query;
-  const startTime = new Date()
-
-  switch (request.method) {
-    case "POST":
-      const lesson = await Lesson.create({
-        jitsiId,
-        startTime
-      });
-      response.status(200).json(lesson);
-    default:
-      return response.status(404).json({ status: "Not found" });
-  }
-}
 
 
 
 
-*/
+
