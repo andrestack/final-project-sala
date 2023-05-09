@@ -2,6 +2,9 @@ import InvoiceOverviewHeader from "Components/InvoicesPage/InvoiceOverviewHeader
 import InvoiceOverviewList from "Components/InvoicesPage/InvoiceOverviewList";
 import { useState } from "react";
 import InvoiceRenderBox from "Components/InvoicesPage/InvoiceRenderBox";
+import InvoicePage from "Components/InvoicesPage/InvoicePage";
+
+
 export default function InvoicesPage() {
   const [selectAll, setSelectAll] = useState(false);
 
@@ -11,13 +14,9 @@ export default function InvoicesPage() {
         YOUR INVOICE OVERVIEW
       </h1>
       <div className="grid grid-cols-2">
-        {/* <InvoiceOverviewHeader
-          handleSelectAll={setSelectAll}
-          selectAll={selectAll}
-        /> */}
-        <InvoiceOverviewList selectAllBoxes={selectAll} />
-
-        <InvoiceRenderBox />
+        <InvoicePage />
+        
+        
       </div>
     </>
   );

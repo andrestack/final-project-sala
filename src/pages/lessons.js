@@ -1,4 +1,4 @@
-import useSWR from "swr";
+
 import LessonOverviewHeader from "Components/LessonsOverview/LessonOverviewHeader";
 import LessonOverviewList from "Components/LessonsOverview/LessonOverviewList";
 import { useState } from "react";

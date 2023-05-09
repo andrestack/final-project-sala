@@ -6,17 +6,11 @@ async function markLessonAsInvoiced(id) {
   const lessonData = await Lesson.findByIdAndUpdate(id, {
     isInvoiced: true,
   });
-  // console.log("lessonsData", lessonData);
+
   await lessonData.save();
 
   return lessonData;
 }
-
-// async function calculateTotal(id) {
-// let total = 0;
-// total += lessonData.unitTotal;
-
-// }
 
 export default async function handler(request, response) {
   await dbConnect();
@@ -33,7 +27,6 @@ export default async function handler(request, response) {
     try {
       const invoiceData = request.body;
       console.log({ invoiceData });
-      //Create a forEach loop to add up the total of the units and fee
 
       let total = 0;
       for (let data of invoiceData) {
@@ -41,7 +34,7 @@ export default async function handler(request, response) {
         total += lesson.unitTotal;
       }
 
-      console.log("total", total);
+      console.log("total", invoiceData);
 
       const invoiceToCreate = await Invoice.create({
         total: total,
@@ -52,7 +45,7 @@ export default async function handler(request, response) {
         path: "lessons",
       });
 
-      // console.log("populate", populatedInvoice);
+      console.log("populate", populatedInvoice);
       return response.status(201).json(populatedInvoice);
     } catch (error) {
       console.log(error);
@@ -71,7 +64,7 @@ export default async function handler(request, response) {
       const populatedUpdateInvoices = await Invoice.populate(invoiceToUpdate, {
         path: "lessons",
       });
-
+   
       return response.status(200).json(populatedUpdateInvoices);
     } catch (error) {
       console.log(error);

@@ -1,42 +1,36 @@
 import useSWR from "swr";
 
-
-// import useCheckBoxStore from "utils/useCheckBoxStore";
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
-export default function InvoiceOverviewList({ selectAllBoxes }) {
-  const { data, isLoading, error } = useSWR("/api/invoices", fetcher, {
-    fallbackData: [],
-  });
-
-  const filteredData = data.filter((lesson) => lesson.total === 2);
-  console.log(filteredData);
-
-  if (error) return <h1>ERROR</h1>;
-  if (isLoading) return <h1>Is isLoading</h1>;
+export default function InvoiceOverviewList({ filteredData, onClick }) {
+  
+  function handleClick(clickedInvoiced) {
+    onClick(clickedInvoiced);
+  }
+  
 
   return (
     <form>
       <div role="list" className="ml-5">
         <h2 className="text-lg font-bold mb-4">INVOICES</h2>
-        {filteredData.map((lesson) => {
-          const date = new Date(lesson.date).toLocaleDateString();
+        {filteredData.map((invoice) => {
+          const date = new Date(invoice.date).toLocaleDateString();
           const fee = 25;
           return (
-            <ul
-              className="grid grid-cols-3 content-center shadow-md p-4 mr-5"
-              key={lesson._id}
-              id="lessons"
-            >
+            <ul key={invoice._id} id="lessons">
               {/* <input
                 name={lesson.roomName}
                 value={lesson._id}
                 type="checkbox"
                 checked={selectAllBoxes ? "checked" : null}
               ></input> */}
-              <li htmlFor="date">{date}</li>
-              <li htmlFor="invoice-nr">{lesson.invoiceNumber}</li>
-              <li htmlFor="total">{lesson.total * fee}</li>
+              <div
+                className="grid grid-cols-3 content-center shadow-md p-4 mr-5"
+                onClick={() => handleClick(invoice)}
+              >
+                <li htmlFor="date">{date}</li>
+                <li htmlFor="invoice-nr">{invoice.invoiceNumber}</li>
+                <li htmlFor="total">{invoice.total * fee}</li>
+                <li htmlFor="delete"></li>
+              </div>
             </ul>
           );
         })}
