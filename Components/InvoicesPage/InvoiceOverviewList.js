@@ -1,7 +1,15 @@
 import useSWR from "swr";
+import useButtonStore from "utils/useButtonStore";
+import { useState } from "react";
 
 export default function InvoiceOverviewList({ filteredData, onClick }) {
-  
+
+  const [isVisible, setIsVisible] = useState(true);
+
+  const toggleVisibility = () => {
+    setIsVisible(!isVisible);
+  }
+
   function handleClick(clickedInvoiced) {
     onClick(clickedInvoiced);
   }
@@ -22,18 +30,19 @@ export default function InvoiceOverviewList({ filteredData, onClick }) {
                 type="checkbox"
                 checked={selectAllBoxes ? "checked" : null}
               ></input> */}
-              <div
-                className="grid grid-cols-3 content-center shadow-md p-4 mr-5"
+              <div isVisible={isVisible}
+                className="grid grid-cols-4 content-center shadow-md p-4 mr-5 "
                 onClick={() => handleClick(invoice)}
               >
                 <li htmlFor="date">{date}</li>
                 <li htmlFor="invoice-nr">{invoice.invoiceNumber}</li>
                 <li htmlFor="total">{invoice.total * fee}</li>
-                <li htmlFor="delete"></li>
+                
               </div>
             </ul>
           );
         })}
+        <button onClick={toggleVisibility} htmlFor="delete">X</button>
 
         {/* <button
           name="button"

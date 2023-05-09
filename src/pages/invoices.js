@@ -5,7 +5,10 @@ import InvoiceRenderBox from "Components/InvoicesPage/InvoiceRenderBox";
 import InvoicePage from "Components/InvoicesPage/InvoicePage";
 
 
-export default function InvoicesPage() {
+export default function InvoicesPage({invoiceInfo}) {
+  console.log("invoiceInfo on invoices page", invoiceInfo)
+  
+  
   const [selectAll, setSelectAll] = useState(false);
 
   return (
@@ -14,7 +17,7 @@ export default function InvoicesPage() {
         YOUR INVOICE OVERVIEW
       </h1>
       <div className="grid grid-cols-2">
-        <InvoicePage />
+        <InvoicePage invoiceInfo={invoiceInfo}/>
         
         
       </div>

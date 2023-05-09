@@ -46,7 +46,7 @@ const Textarea = styled.textarea`
 `;
 
 export default function InvoiceForm({ invoiceInfo }) {
-  console.log("first", invoiceInfo);
+console.log("invoiceInfo on InvoiceForm", invoiceInfo);
 
   const [address, setAddress] = useState("");
   const [invoiceNumber, setInvoiceNumber] = useState("");
@@ -84,6 +84,7 @@ export default function InvoiceForm({ invoiceInfo }) {
       console.error(`Error: ${response.status}`);
     } else {
       console.log("RESPONSE FROM PATCH ", await response.json());
+      alert("Invoice created successfully");
       // console.error(`Error: ${response.status}`);
     }
   }

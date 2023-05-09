@@ -6,15 +6,17 @@ import { useState } from "react";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-export default function InvoicePage() {
+export default function InvoicePage({ invoiceInfo }) {
+  console.log(invoiceInfo);
   const [showInvoice, setShowInvoice] = useState("");
+  const [lessons, setLessons] = useState([]);
 
   const { data, isLoading, error } = useSWR("/api/invoices", fetcher, {
     fallbackData: [],
   });
 
   const filteredData = data.filter((invoice) => invoice.invoiceNumber);
-  console.log("filtered", filteredData);
+  // console.log("non filtered", data);
 
   if (error) return <h1>ERROR</h1>;
   if (isLoading) return <h1>Is isLoading</h1>;
@@ -28,7 +30,7 @@ export default function InvoicePage() {
     const response = await fetch(url);
     let newData = await response.json();
 
-    console.log("data", newData);
+    setLessons(newData.lessons);
 
     // GET REQUEST invoice/invoice here usando do ID
   }
@@ -36,7 +38,7 @@ export default function InvoicePage() {
   return (
     <>
       <InvoiceOverviewList onClick={handleClick} filteredData={filteredData} />
-      <InvoiceRenderBox showInvoice={showInvoice} />
+      <InvoiceRenderBox showInvoice={showInvoice} lessons={lessons} />
     </>
   );
 }
