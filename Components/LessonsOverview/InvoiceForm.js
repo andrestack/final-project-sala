@@ -46,7 +46,7 @@ const Textarea = styled.textarea`
 `;
 
 export default function InvoiceForm({ invoiceInfo }) {
-console.log("invoiceInfo on InvoiceForm", invoiceInfo);
+  console.log("invoiceInfo on InvoiceForm", invoiceInfo);
 
   const [address, setAddress] = useState("");
   const [invoiceNumber, setInvoiceNumber] = useState("");

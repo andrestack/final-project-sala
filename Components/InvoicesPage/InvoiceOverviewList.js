@@ -21,16 +21,16 @@ export default function InvoiceOverviewList({ filteredData, onClick }) {
           const date = new Date(invoice.date).toLocaleDateString();
           const fee = 25;
           return (
-            <ul
+            <div
               className="grid grid-cols-3 content-center shadow-md p-4 mr-5 "
               onClick={() => handleClick(invoice)}
               key={invoice._id}
               id="lessons"
             >
-              <li htmlFor="date">{date}</li>
-              <li htmlFor="invoice-nr">{invoice.invoiceNumber}</li>
-              <li htmlFor="total">{invoice.total * fee}</li>
-            </ul>
+              <label htmlFor="date">{date}</label>
+              <label htmlFor="invoice-nr">{invoice.invoiceNumber}</label>
+              <label htmlFor="total">{invoice.total * fee}</label>
+            </div>
           );
         })}
         {/* <button onClick={toggleVisibility} htmlFor="delete">X</button> */}

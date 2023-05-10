@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 
-export default function JitsiMeet({courseCode}) {
+export default function JitsiMeet({ courseCode }) {
   const jitsiContainer = useRef(null);
   const jitsiApi = useRef(null);
 
@@ -11,14 +11,15 @@ export default function JitsiMeet({courseCode}) {
   const randomCountry = chance.country({ full: true });
   const randomAnimal = chance.animal({ type: "ocean" });
   const randomRoomNumber = chance.natural({ min: 156789547, max: 999999999 });
-  const randomRoomName = randomCountry+randomAnimal;
+  const randomRoomName = randomCountry + randomAnimal;
 
   useEffect(() => {
     const domain = "meet.jit.si";
     const options = {
       roomName: randomRoomName,
-      width: "700px",
+      width: "500px",
       height: "700px",
+      text: "center",
       parentNode: jitsiContainer.current,
       configOverwrite: {},
       lang: "de",
@@ -37,9 +38,8 @@ export default function JitsiMeet({courseCode}) {
     jitsiApi.current.addListener("videoConferenceLeft", () => {
       alert("The end time has been registered. You will end the meeting");
       handleMeetingEnd();
+      window.location.href = "http://localhost:3000/lessons";
     });
-
-
 
     async function handleMeetingStart() {
       const url = `/api/${options.roomName}/start-unit`;
@@ -82,20 +82,18 @@ export default function JitsiMeet({courseCode}) {
 
   return (
     <div
-      styles={{
-        text: "center",
-        padding: "10px",
-        height: "400px",
-        border: "10px dashed #df486f",
-      }}
+      styles={
+        {
+          // text: "center",
+          // padding: "10px",
+          // height: "400px",
+          // border: "10px dashed #df486f",
+        }
+      }
       ref={jitsiContainer}
     />
   );
 }
-
-
-
-
 
 /* "use client";
 import { useEffect, useRef } from "react";

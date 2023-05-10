@@ -1,9 +1,13 @@
 import ButtonOpenJitsi from "./ButtonOpenJitsi";
 import { useState } from "react";
+import JitsiMeet from "../JitsiMeet";
+import useButtonStore from "utils/useButtonStore";
 
 export default function ButtonAddCourseCode() {
   const [courseCode, setCourseCode] = useState("");
   const [isMeetingButtonDisabled, setIsMeetingButtonDisabled] = useState(true);
+  const isVisible = useButtonStore((state) => state.isVisible);
+  const toggleVisibility = useButtonStore((state) => state.toggleVisibility);
 
   const noInput = courseCode.length < 4;
 
@@ -12,42 +16,47 @@ export default function ButtonAddCourseCode() {
   }
   function handleEnableMeetingButton(event) {
     setIsMeetingButtonDisabled(false);
+    toggleVisibility();
   }
 
   function handleOpenMeetingClick() {
     setIsMeetingButtonDisabled(true);
   }
-console.log(courseCode)
-
-
+  console.log(courseCode);
 
   return (
     <>
-      <label className="text-lg">What course are you teaching?</label>
-      <div className="place-items-center w-full flex justify-self-auto flex-row">
-        <label className="text-lg">
-          <input
-            required
-            onChange={handleCourseCodeChange}
-            disabled={!isMeetingButtonDisabled}
-            placeholder="Course Code"
-            type="text"
-            className="p-2"
-          />
-        </label>
-
-        <button
-          name="button"
-          disabled={noInput}
-          onClick={handleEnableMeetingButton}
-          className="font-mono m-auto bg-gradient-to-r from-energy-100 to-energy-400 hover:from-focus-400 hover:to-focus-100 rounded-md text-white p-2 text-align-center"
-        >
-          Add Course Code
-        </button>
+      <div className="text-lg text-center mx-3 text-white font-sans">
+        What course are you teaching?
       </div>
-      {!isMeetingButtonDisabled && (
-        <ButtonOpenJitsi courseCode={courseCode} onClick={handleOpenMeetingClick} />
-      )}
+      <div className="mx-60 mt-10 bg-gradient-to-r from-focus-400 via-focus-100 to-focus-300 p-6 rounded-md">
+        <div className="grid grid-cols-2 ">
+          <label className="text-right">
+            <input
+              required
+              onChange={handleCourseCodeChange}
+              disabled={!isMeetingButtonDisabled}
+              placeholder="add course code"
+              type="text"
+              className="p-2.5 text-sm font-sans rounded-md lg:flex-col"
+            />
+          </label>
+          <div className="w-full">
+            <button
+              name="button"
+              disabled={noInput}
+              onClick={handleEnableMeetingButton}
+              className="font-sans m-auto bg-gradient-to-r from-energy-100 to-energy-400 hover:from-focus-400 hover:to-focus-100 rounded-md text-white p-2"
+            >
+              Open Meeting
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-3 flex justify-center">
+          {!isMeetingButtonDisabled && <JitsiMeet courseCode={courseCode} />}
+        </div>
+      </div>
     </>
   );
 }

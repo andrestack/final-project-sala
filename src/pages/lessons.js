@@ -5,14 +5,18 @@ import { useState } from "react";
 import InvoiceForm from "Components/LessonsOverview/InvoiceForm";
 import ButtonOpenInvoiceForm from "Components/Buttons/ButtonOpenInvoiceForm";
 
-export default function LessonsPage({invoiceInfo, getInvoiceInfo}) {
+export default function LessonsPage() {
   const [selectAll, setSelectAll] = useState(false);
-  // const [invoiceInfo, setInvoiceInfo] = useState({});
+  const [invoiceInfo, setInvoiceInfo] = useState({});
   const [isFormOpen, setFormOpen] = useState(false);
 
   const handleToggleForm = () => {
     setFormOpen(!isFormOpen);
   };
+
+  function getInvoiceInfo(info) {
+    setInvoiceInfo(info);
+  }
 
   // function getInvoiceInfo(info) {
   //   setInvoiceInfo(info);
