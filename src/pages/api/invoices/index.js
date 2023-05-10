@@ -7,7 +7,9 @@ async function markLessonAsInvoiced(id) {
     isInvoiced: true,
   });
 
-  lessonData.save();
+  await lessonData.save();
+
+  return lessonData;
 }
 
 export default async function handler(request, response) {
@@ -24,15 +26,18 @@ export default async function handler(request, response) {
   if (request.method === "POST") {
     try {
       const invoiceData = request.body;
+      console.log({ invoiceData });
 
-      //Create a forEach loop to add up the total of the units and fee
+      let total = 0;
+      for (let data of invoiceData) {
+        const lesson = await markLessonAsInvoiced(data);
+        total += lesson.unitTotal;
+      }
 
-      invoiceData.forEach((data) => {
-        markLessonAsInvoiced(data);
-      });
-      const total = 100;
+      console.log("total", invoiceData);
+
       const invoiceToCreate = await Invoice.create({
-        total,
+        total: total,
         date,
         lessons: invoiceData,
       });
@@ -40,7 +45,7 @@ export default async function handler(request, response) {
         path: "lessons",
       });
 
-      // console.log("populate", populatedInvoice);
+      console.log("populate", populatedInvoice);
       return response.status(201).json(populatedInvoice);
     } catch (error) {
       console.log(error);
@@ -49,7 +54,7 @@ export default async function handler(request, response) {
     }
   }
   if (request.method === "PATCH") {
-    console.log(request.body);
+    console.log("patch body", request.body);
     try {
       const invoiceToUpdate = await Invoice.findByIdAndUpdate(
         request.body.updatedInvoicesIds,
@@ -59,7 +64,7 @@ export default async function handler(request, response) {
       const populatedUpdateInvoices = await Invoice.populate(invoiceToUpdate, {
         path: "lessons",
       });
-
+   
       return response.status(200).json(populatedUpdateInvoices);
     } catch (error) {
       console.log(error);

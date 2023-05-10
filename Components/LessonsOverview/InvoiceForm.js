@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useSWR from "swr";
+
 import styled from "styled-components";
 
 const FormContainer = styled.form`
@@ -45,22 +45,18 @@ const Textarea = styled.textarea`
   }
 `;
 
-export default function InvoiceForm({ invoiceInfo, isFormOpen }) {
-  console.log("first", invoiceInfo);
+export default function InvoiceForm({ invoiceInfo }) {
+console.log("invoiceInfo on InvoiceForm", invoiceInfo);
 
   const [address, setAddress] = useState("");
   const [invoiceNumber, setInvoiceNumber] = useState("");
   const [bankDetails, setBankDetails] = useState("");
   const [taxID, setTaxID] = useState("");
   const [date, setDate] = useState(new Date());
-  const [otherInfo, setOtherInfo] = useState("");
+  const [textArea, setTextArea] = useState("");
   const [footer, setFooter] = useState("");
 
-  const obj = invoiceInfo.lessons;
-
-  let unitTotalSum = 0;
-  obj?.forEach((lesson) => (unitTotalSum += lesson.unitTotal));
-  console.log("total", unitTotalSum);
+  const allTotal = invoiceInfo.total;
 
   function millisToMinutesAndSeconds(millis) {
     var minutes = Math.floor(millis / 60000);
@@ -68,23 +64,12 @@ export default function InvoiceForm({ invoiceInfo, isFormOpen }) {
     return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
   }
 
-  // function lessonUnitsAndFee(millis, fee) {
-  //   return (
-  //     (millis < 2700000 ? 0 : millis <= 4800000 && millis > 2700000 ? 1 : 2) *
-  //     fee
-  //   );
-  // }
-
   async function handleSubmit(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
 
     const invoiceData = Object.fromEntries(formData);
-
-    event.target.reset();
-    event.target.elements.name.focus();
-
     const updatedInvoicesIds = invoiceInfo._id;
 
     const url = `/api/invoices`;
@@ -99,6 +84,7 @@ export default function InvoiceForm({ invoiceInfo, isFormOpen }) {
       console.error(`Error: ${response.status}`);
     } else {
       console.log("RESPONSE FROM PATCH ", await response.json());
+      alert("Invoice created successfully");
       // console.error(`Error: ${response.status}`);
     }
   }
@@ -126,7 +112,7 @@ export default function InvoiceForm({ invoiceInfo, isFormOpen }) {
           <Label>
             <Input
               required
-              name="invoice-number"
+              name="invoiceNumber"
               placeholder="Your invoice number"
               type="text"
               value={invoiceNumber}
@@ -149,7 +135,7 @@ export default function InvoiceForm({ invoiceInfo, isFormOpen }) {
           <br />
           <Label>
             <Input
-              name="tax number"
+              name="taxNumber"
               required
               placeholder="Your Tax Number"
               type="text"
@@ -217,14 +203,14 @@ export default function InvoiceForm({ invoiceInfo, isFormOpen }) {
             <label className="text-center font-mono" htmlFor="Course"></label>
             <label className="text-center font-mono" htmlFor="Duration"></label>
             <label className="text-center font-mono" htmlFor="total-units">
-              {unitTotalSum}
+              {allTotal}
             </label>
             <label
               className="text-center font-mono"
               htmlFor="Euro-unit"
             ></label>
             <label className="text-center font-mono" htmlFor="total-euro">
-              {unitTotalSum * 25}
+              {allTotal * 25}
             </label>
           </div>
 
@@ -232,10 +218,10 @@ export default function InvoiceForm({ invoiceInfo, isFormOpen }) {
             <br />
             <Label>
               <Textarea
-                name="text-area"
+                name="textArea"
                 placeholder="Other info"
-                value={otherInfo}
-                onChange={(event) => setOtherInfo(event.target.value)}
+                value={textArea}
+                onChange={(event) => setTextArea(event.target.value)}
               />
             </Label>
             <br />

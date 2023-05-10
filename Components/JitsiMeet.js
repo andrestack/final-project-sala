@@ -39,7 +39,7 @@ export default function JitsiMeet({courseCode}) {
       handleMeetingEnd();
     });
 
-    // console.log(options.roomName);
+
 
     async function handleMeetingStart() {
       const url = `/api/${options.roomName}/start-unit`;

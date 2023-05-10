@@ -9,7 +9,7 @@ const lessonSchema = new Schema({
   unitTotal: { type: Number, required: false },
   euroTotal: { type: Number, required: false },
   isInvoiced: { type: Boolean, required: false, default: false },
-  courseCode: { type: String, required: true },
+  courseCode: { type: String, required: false },
 });
 
 const Lesson = mongoose.models.Lesson || mongoose.model("Lesson", lessonSchema);
