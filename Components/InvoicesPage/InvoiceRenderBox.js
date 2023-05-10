@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import InvoiceForm from "Components/LessonsOverview/InvoiceForm";
+import InvoiceForm from "Components/LessonsOverview/InvoiceForm2";
 import useSWR from "swr";
 
 const FormContainer = styled.form`
@@ -65,16 +65,14 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
         <p name="taxNumber">Tax Nr.: {taxNumber}</p>
         <p name="date">{date && new Date(date).toLocaleDateString()}</p>
       </section>
-      <section className="text-sm mt-6 grid grid-cols-6 content-around h-8 border-b">
+      <section className="text-sm mt-6 grid grid-cols-5 content-around h-8 border-b">
         <label className="text-center font-mono" htmlFor="Date">
           Date
         </label>
         <label className="text-center font-mono" htmlFor="Course">
           Course
         </label>
-        <label className="text-center font-mono" htmlFor="End Time">
-          Duration
-        </label>
+        
         <label className="text-center font-mono" htmlFor="Units">
           Units
         </label>
@@ -87,20 +85,21 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
       </section>
       <section className="border-b h-8">
         {lessons?.map((lesson) => {
-          const options = {month:"numeric", day:"numeric"}
-          const date = new Date(lesson.startTime).toLocaleDateString(undefined, options);
-          const duration = lesson.endTime - lesson.startTime;
+          const options = { month: "numeric", day: "numeric" };
+          const date = new Date(lesson.startTime).toLocaleDateString(
+            undefined,
+            options
+          );
+          // const duration = lesson.endTime - lesson.startTime;
           const fee = 25;
           return (
             <div
-              className="grid grid-cols-6 content-around text-center text-sm mt-2"
+              className="grid grid-cols-5 content-around text-center text-sm mt-2"
               key={lesson._id}
             >
               <Label htmlFor="date">{date}</Label>
               <Label htmlFor="course-code">{lesson.courseCode}</Label>
-              <Label htmlFor="duration">
-                {millisToMinutesAndSeconds(duration)}
-              </Label>
+              
               <Label>{lesson.unitTotal}</Label>
               <Label>{fee}</Label>
               <Label htmlFor="total">{lesson.unitTotal * fee}</Label>
@@ -108,10 +107,10 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
           );
         })}
       </section>
-      <div className="text-sm mt-6 grid grid-cols-6 content-around bg-white h-8">
+      <div className="text-sm mt-6 grid grid-cols-5 content-around bg-white h-8">
         <label className="text-center font-mono" htmlFor="Date"></label>
         <label className="text-center font-mono" htmlFor="Course"></label>
-        <label className="text-center font-mono" htmlFor="Duration"></label>
+        {/* <label className="text-center font-mono" htmlFor="Duration"></label> */}
         <label className="text-center font-mono" htmlFor="total-units">
           {total}
         </label>

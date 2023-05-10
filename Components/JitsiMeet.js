@@ -38,8 +38,13 @@ export default function JitsiMeet({ courseCode }) {
     jitsiApi.current.addListener("videoConferenceLeft", () => {
       alert("The end time has been registered. You will end the meeting");
       handleMeetingEnd();
-      window.location.href = "http://localhost:3000/lessons";
+      // window.location.href = "http://localhost:3000/lessons";
+      jitsiClose();
     });
+
+    function jitsiClose() {
+      jitsiApi.current?.dispose?.();
+    }
 
     async function handleMeetingStart() {
       const url = `/api/${options.roomName}/start-unit`;

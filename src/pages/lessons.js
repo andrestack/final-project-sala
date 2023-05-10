@@ -1,9 +1,9 @@
-
 import LessonOverviewHeader from "Components/LessonsOverview/LessonOverviewHeader";
 import LessonOverviewList from "Components/LessonsOverview/LessonOverviewList";
 import { useState } from "react";
 import InvoiceForm from "Components/LessonsOverview/InvoiceForm";
 import ButtonOpenInvoiceForm from "Components/Buttons/ButtonOpenInvoiceForm";
+import MockUp from "Components/LessonsOverview/InvoiceForm";
 
 export default function LessonsPage() {
   const [selectAll, setSelectAll] = useState(false);
@@ -36,6 +36,7 @@ export default function LessonsPage() {
         getInvoiceInfo={getInvoiceInfo}
         handleToggleForm={handleToggleForm}
       />
+
       {/* <ButtonOpenInvoiceForm handleToggleForm={handleToggleForm}/> */}
       {/* {lessonsIds.length != 0 &&  */}
 
@@ -43,9 +44,10 @@ export default function LessonsPage() {
       <div
         className={`transform transition-transform duration-500 ease-in ${
           isFormOpen ? "translate-x-100" : "translate-x-full"
-        } bg-white h-full w-1/2}`}
+        } bg-grey-50 absolute right-0 top-0 h-screen w-1/2 z-10 ${isFormOpen}`}
       >
         <InvoiceForm invoiceInfo={invoiceInfo} />
+        {/* <InvoiceForm invoiceInfo={invoiceInfo} /> */}
       </div>
       {/* </div> */}
     </>
@@ -58,4 +60,3 @@ export default function LessonsPage() {
      
  {/* {isFormOpen &&()}}*/
 }
-

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import styled from "styled-components";
+import SlideRoutes from "react-slide-routes";
+import { Route } from "react-router-dom";
 
 export default function Header() {
   return (
