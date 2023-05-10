@@ -4,11 +4,11 @@ import { useState } from "react";
 
 export default function InvoiceOverviewList({ filteredData, onClick }) {
 
-  const [isVisible, setIsVisible] = useState(true);
+  // const [isVisible, setIsVisible] = useState(true);
 
-  const toggleVisibility = () => {
-    setIsVisible(!isVisible);
-  }
+  // const toggleVisibility = () => {
+  //   setIsVisible(!isVisible);
+  // }
 
   function handleClick(clickedInvoiced) {
     onClick(clickedInvoiced);
@@ -30,7 +30,7 @@ export default function InvoiceOverviewList({ filteredData, onClick }) {
                 type="checkbox"
                 checked={selectAllBoxes ? "checked" : null}
               ></input> */}
-              <div isVisible={isVisible}
+              <div 
                 className="grid grid-cols-4 content-center shadow-md p-4 mr-5 "
                 onClick={() => handleClick(invoice)}
               >
@@ -42,7 +42,7 @@ export default function InvoiceOverviewList({ filteredData, onClick }) {
             </ul>
           );
         })}
-        <button onClick={toggleVisibility} htmlFor="delete">X</button>
+        {/* <button onClick={toggleVisibility} htmlFor="delete">X</button> */}
 
         {/* <button
           name="button"

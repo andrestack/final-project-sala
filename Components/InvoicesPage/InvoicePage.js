@@ -7,7 +7,7 @@ import { useState } from "react";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function InvoicePage({ invoiceInfo }) {
-  console.log(invoiceInfo);
+ 
   const [showInvoice, setShowInvoice] = useState("");
   const [lessons, setLessons] = useState([]);
 
@@ -23,7 +23,7 @@ export default function InvoicePage({ invoiceInfo }) {
 
   async function handleClick(clickedInvoiced) {
     setShowInvoice(clickedInvoiced);
-    console.log("CLICK", clickedInvoiced);
+    
 
     // const filteredId = filteredData.filter((id) => id._id);
     const url = `/api/invoices/${clickedInvoiced._id}`;

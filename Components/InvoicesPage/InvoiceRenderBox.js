@@ -44,7 +44,6 @@ const Textarea = styled.textarea`
     width: 15rem;
   }
 `;
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function InvoiceRenderBox({ showInvoice, lessons }) {
   function millisToMinutesAndSeconds(millis) {
@@ -53,19 +52,20 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
     return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
   }
 
-  const { date, address, invoiceNumber, IBAN, taxNumber, name } = showInvoice;
+  const { date, address, invoiceNumber, IBAN, taxNumber, name, total } =
+    showInvoice;
 
   return (
     <div className="bg-white text-sm font-mono rounded-lg ml-5 shadow-md p-5 w-5/6 pl-4 border-2 border-energy-200">
       <section className="grid grid-cols-2">
         <p name="name">{name}</p>
         <p name="address">{address}</p>
-        <p name="invoiceNumber">{invoiceNumber}</p>
-        <p name="IBAN">{IBAN}</p>
-        <p name="taxNumber">{taxNumber}</p>
+        <p name="invoiceNumber">Invoice Nr.: {invoiceNumber}</p>
+        <p name="IBAN">IBAN: {IBAN}</p>
+        <p name="taxNumber">Tax Nr.: {taxNumber}</p>
         <p name="date">{date && new Date(date).toLocaleDateString()}</p>
       </section>
-      <section className="text-sm mt-6 grid grid-cols-6 content-around bg-white h-8">
+      <section className="text-sm mt-6 grid grid-cols-6 content-around h-8 border-b">
         <label className="text-center font-mono" htmlFor="Date">
           Date
         </label>
@@ -85,7 +85,7 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
           €/Total
         </label>
       </section>
-      <section>
+      <section className="border-b h-8">
         {lessons?.map((lesson) => {
           const date = new Date(lesson.startTime).toLocaleDateString();
           const duration = lesson.endTime - lesson.startTime;
@@ -107,6 +107,18 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
           );
         })}
       </section>
+      <div className="text-sm mt-6 grid grid-cols-6 content-around bg-white h-8">
+        <label className="text-center font-mono" htmlFor="Date"></label>
+        <label className="text-center font-mono" htmlFor="Course"></label>
+        <label className="text-center font-mono" htmlFor="Duration"></label>
+        <label className="text-center font-mono" htmlFor="total-units">
+          {total}
+        </label>
+        <label className="text-center font-mono" htmlFor="Euro-unit"></label>
+        <label className="text-center font-mono" htmlFor="total-euro">
+          {total && (total * 25)}
+        </label>
+      </div>
     </div>
   );
 }
