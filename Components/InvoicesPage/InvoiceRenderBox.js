@@ -87,7 +87,8 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
       </section>
       <section className="border-b h-8">
         {lessons?.map((lesson) => {
-          const date = new Date(lesson.startTime).toLocaleDateString();
+          const options = {month:"numeric", day:"numeric"}
+          const date = new Date(lesson.startTime).toLocaleDateString(undefined, options);
           const duration = lesson.endTime - lesson.startTime;
           const fee = 25;
           return (
@@ -116,7 +117,7 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
         </label>
         <label className="text-center font-mono" htmlFor="Euro-unit"></label>
         <label className="text-center font-mono" htmlFor="total-euro">
-          {total && (total * 25)}
+          {total && total * 25}
         </label>
       </div>
     </div>
