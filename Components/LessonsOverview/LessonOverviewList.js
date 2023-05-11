@@ -77,7 +77,7 @@ export default function LessonOverviewList({ selectAllBoxes, getInvoiceInfo, han
           const fee = 25;
           return (
             <div
-              className="h-7 my-2 grid grid-cols-7 content-around text-energy-400 text-xl"
+              className="h-7 my-2 grid grid-cols-7 content-around text-energy-400 text-xl mx-10"
               key={lesson._id}
               id="lessons"
             >
@@ -100,7 +100,7 @@ export default function LessonOverviewList({ selectAllBoxes, getInvoiceInfo, han
         })}
 
         <button
-          className="font-mono m-auto bg-gradient-to-r from-energy-100 to-energy-400 hover:from-focus-400 hover:to-focus-100 rounded-md text-white p-4 text-align-center"
+          className="font-sans text-lg mt-6 bg-gradient-to-r from-energy-100 to-energy-400 hover:from-focus-400 hover:to-focus-100 rounded-md text-white p-4 text-align-center"
           type="submit"
           onClick={handleAddToInvoices}
         >

@@ -1,5 +1,6 @@
 import ButtonOpenJitsi from "./ButtonOpenJitsi";
 import { useState } from "react";
+import JitsiMeet from "../JitsiMeet";
 
 export default function ButtonAddCourseCode() {
   const [courseCode, setCourseCode] = useState("");
@@ -17,37 +18,41 @@ export default function ButtonAddCourseCode() {
   function handleOpenMeetingClick() {
     setIsMeetingButtonDisabled(true);
   }
-console.log(courseCode)
-
-
+  console.log(courseCode);
 
   return (
     <>
-      <label className="text-lg">What course are you teaching?</label>
-      <div className="place-items-center w-full flex justify-self-auto flex-row">
-        <label className="text-lg">
-          <input
-            required
-            onChange={handleCourseCodeChange}
-            disabled={!isMeetingButtonDisabled}
-            placeholder="Course Code"
-            type="text"
-            className="p-2"
-          />
-        </label>
-
-        <button
-          name="button"
-          disabled={noInput}
-          onClick={handleEnableMeetingButton}
-          className="font-mono m-auto bg-gradient-to-r from-energy-100 to-energy-400 hover:from-focus-400 hover:to-focus-100 rounded-md text-white p-2 text-align-center"
-        >
-          Add Course Code
-        </button>
+      <div className="text-2xl text-center m-10 text-white font-sans">
+        What course are you teaching?
       </div>
-      {!isMeetingButtonDisabled && (
-        <ButtonOpenJitsi courseCode={courseCode} onClick={handleOpenMeetingClick} />
-      )}
+      <div className="mx-96  mt-10 mb-10 bg-gradient-to-r sm:flex-col from-focus-400 via-focus-100 to-focus-300 p-6 rounded-2xl">
+        <div className="grid grid-cols-2 space-x-6">
+          <label className="text-right mr-2">
+            <input
+              required
+              onChange={handleCourseCodeChange}
+              disabled={!isMeetingButtonDisabled}
+              placeholder="add course code"
+              type="text"
+              className="p-2.5 text-sm font-sans rounded-xl lg:flex-col"
+            />
+          </label>
+          <div className="">
+            <button
+              name="button"
+              disabled={noInput}
+              onClick={handleEnableMeetingButton}
+              className="font-sans m-auto bg-gradient-to-r from-energy-100 to-energy-400 hover:from-focus-400 hover:to-focus-100 rounded-xl text-white p-2"
+            >
+              Open Meeting
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-3 flex justify-center">
+          {!isMeetingButtonDisabled && <JitsiMeet courseCode={courseCode} />}
+        </div>
+      </div>
     </>
   );
 }

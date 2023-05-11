@@ -13,10 +13,10 @@ export default function InvoicesPage({invoiceInfo}) {
 
   return (
     <>
-      <h1 className="bg-none p-10 text-center font-mono text-energy-200 text-2xl">
+      <h1 className="bg-none p-5 m-20 text-center font-sans font-bold text-energy-200 text-3xl">
         YOUR INVOICE OVERVIEW
       </h1>
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-2 p-5 my-5">
         <InvoicePage invoiceInfo={invoiceInfo}/>
         
         

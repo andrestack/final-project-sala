@@ -15,3 +15,13 @@ body {
   min-height: 100vh;
   width: 100vw;
 }
+
+.quick-example {
+  margin: 1rem;
+  padding: 1rem;
+  transition: grid-template-rows 500ms;
+}
+
+.quick-example:hover {
+  grid-template-rows: 1fr;
+}

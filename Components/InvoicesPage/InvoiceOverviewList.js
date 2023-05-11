@@ -1,6 +1,7 @@
 import useSWR from "swr";
 import useButtonStore from "utils/useButtonStore";
 import { useState } from "react";
+import InvoiceOverviewHeader from "./InvoiceOverviewHeader";
 
 export default function InvoiceOverviewList({ filteredData, onClick }) {
   // const [isVisible, setIsVisible] = useState(true);
@@ -14,23 +15,25 @@ export default function InvoiceOverviewList({ filteredData, onClick }) {
   }
 
   return (
+
+    
     <form>
-      <div role="list" className="ml-5">
-        <h2 className="text-lg font-bold mb-4">INVOICES</h2>
+      <div role="list" className="space-y-2 pr-5">
+        <InvoiceOverviewHeader />
         {filteredData.map((invoice) => {
           const date = new Date(invoice.date).toLocaleDateString();
           const fee = 25;
           return (
-            <ul
-              className="grid grid-cols-3 content-center shadow-md p-4 mr-5 "
+            <div
+              className="ml-5 grid grid-cols-3 text-energy-200 text-lg  shadow-lg hover:shadow-[1px_1px_7px_3px_#ff7f11] p-5 transition ease-out hover:-translate-x-2 delay-150"
               onClick={() => handleClick(invoice)}
               key={invoice._id}
               id="lessons"
             >
-              <li htmlFor="date">{date}</li>
-              <li htmlFor="invoice-nr">{invoice.invoiceNumber}</li>
-              <li htmlFor="total">{invoice.total * fee}</li>
-            </ul>
+              <label className="text-center" htmlFor="date">{date}</label>
+              <label className="text-center" htmlFor="invoice-nr">{invoice.invoiceNumber}</label>
+              <label className="text-center" htmlFor="total">{invoice.total * fee} €</label>
+            </div>
           );
         })}
         {/* <button onClick={toggleVisibility} htmlFor="delete">X</button> */}

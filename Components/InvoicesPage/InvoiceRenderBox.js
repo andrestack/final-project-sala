@@ -1,18 +1,8 @@
 import styled from "styled-components";
-import InvoiceForm from "Components/LessonsOverview/InvoiceForm";
+import InvoiceForm from "Components/LessonsOverview/InvoiceForm2";
 import useSWR from "swr";
 
-const FormContainer = styled.form`
-  display: grid;
-  gap: 0.5rem;
-  background-color: yellow;
-  @media (max-width: 390px) {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    width: 15rem;
-  }
-`;
+
 
 const Label = styled.label`
   font-weight: bold;
@@ -21,29 +11,6 @@ const Label = styled.label`
   }
 `;
 
-const Input = styled.input`
-  padding: 0.5rem;
-  font-size: inherit;
-  border: 1px solid black;
-  background-color: #b4c7a8;
-  border-radius: 0.3rem;
-  font-size: 1rem;
-  @media (max-width: 390px) {
-    width: 15rem;
-  }
-`;
-
-const Textarea = styled.textarea`
-  adding: 0.5rem;
-  font-size: inherit;
-  border: 1px solid black;
-  background-color: #b4c7a8;
-  border-radius: 0.3rem;
-  font-size: 1rem;
-  @media (max-width: 390px) {
-    width: 15rem;
-  }
-`;
 
 export default function InvoiceRenderBox({ showInvoice, lessons }) {
   function millisToMinutesAndSeconds(millis) {
@@ -52,29 +19,52 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
     return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
   }
 
-  const { date, address, invoiceNumber, IBAN, taxNumber, name, total } =
-    showInvoice;
+  const {
+    date,
+    address,
+    invoiceNumber,
+    IBAN,
+    taxNumber,
+    name,
+    total,
+    footer,
+    textArea,
+  } = showInvoice;
 
   return (
-    <div className="bg-white text-sm font-mono rounded-lg ml-5 shadow-md p-5 w-5/6 pl-4 border-2 border-energy-200">
-      <section className="grid grid-cols-2">
-        <p name="name">{name}</p>
-        <p name="address">{address}</p>
-        <p name="invoiceNumber">Invoice Nr.: {invoiceNumber}</p>
-        <p name="IBAN">IBAN: {IBAN}</p>
-        <p name="taxNumber">Tax Nr.: {taxNumber}</p>
-        <p name="date">{date && new Date(date).toLocaleDateString()}</p>
-      </section>
-      <section className="text-sm mt-6 grid grid-cols-6 content-around h-8 border-b">
+    <div className="bg-white sticky top-0  text-base font-mono rounded-lg ml-5 shadow-md p-5 mr-10 h-fit px-4 border-2 border-energy-200">
+      <div className=" p-5">
+        <section className="w-full sm:w-1/2">
+          <p className="my-2" name="name">
+            {name}
+          </p>
+          <p className="my-2" name="address">
+            {address}
+          </p>
+        </section>
+        <div className="mt-10 text-right">
+          <p className="my-2" name="invoiceNumber">
+            <b>Invoice Nr.:</b> {invoiceNumber}
+          </p>
+          <p className="my-2" name="IBAN">
+            <b>My IBAN:</b> {IBAN}
+          </p>
+          <p className="my-2" name="taxNumber">
+            <b>My Tax Nr.:</b> {taxNumber}
+          </p>
+        </div>
+      </div>
+      <p className="mt-20 text-right mx-10" name="date">
+        Berlin, {date && new Date(date).toLocaleDateString()}
+      </p>
+      <div className="mt-20 text-base grid grid-cols-5 content-around border-b">
         <label className="text-center font-mono" htmlFor="Date">
           Date
         </label>
         <label className="text-center font-mono" htmlFor="Course">
           Course
         </label>
-        <label className="text-center font-mono" htmlFor="End Time">
-          Duration
-        </label>
+
         <label className="text-center font-mono" htmlFor="Units">
           Units
         </label>
@@ -84,23 +74,24 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
         <label className="text-center font-mono" htmlFor="Total">
           €/Total
         </label>
-      </section>
-      <section className="border-b h-8">
+      </div>
+      <section className="h-8">
         {lessons?.map((lesson) => {
-          const options = {month:"numeric", day:"numeric"}
-          const date = new Date(lesson.startTime).toLocaleDateString(undefined, options);
-          const duration = lesson.endTime - lesson.startTime;
+          const options = { month: "numeric", day: "numeric" };
+          const date = new Date(lesson.startTime).toLocaleDateString(
+            undefined,
+            options
+          );
+          // const duration = lesson.endTime - lesson.startTime;
           const fee = 25;
           return (
             <div
-              className="grid grid-cols-6 content-around text-center text-sm mt-2"
+              className="grid grid-cols-5 content-around text-center text-sm mt-2"
               key={lesson._id}
             >
               <Label htmlFor="date">{date}</Label>
               <Label htmlFor="course-code">{lesson.courseCode}</Label>
-              <Label htmlFor="duration">
-                {millisToMinutesAndSeconds(duration)}
-              </Label>
+
               <Label>{lesson.unitTotal}</Label>
               <Label>{fee}</Label>
               <Label htmlFor="total">{lesson.unitTotal * fee}</Label>
@@ -108,18 +99,27 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
           );
         })}
       </section>
-      <div className="text-sm mt-6 grid grid-cols-6 content-around bg-white h-8">
+      <div className="text-base mt-9 grid grid-cols-5 content-around bg-white h-8 border-t">
         <label className="text-center font-mono" htmlFor="Date"></label>
         <label className="text-center font-mono" htmlFor="Course"></label>
-        <label className="text-center font-mono" htmlFor="Duration"></label>
+        {/* <label className="text-center font-mono" htmlFor="Duration"></label> */}
         <label className="text-center font-mono" htmlFor="total-units">
           {total}
         </label>
         <label className="text-center font-mono" htmlFor="Euro-unit"></label>
         <label className="text-center font-mono" htmlFor="total-euro">
-          {total && total * 25}
+          {total && total * 25}€
         </label>
       </div>
+      <section className="mt-8 p-5">
+        <div>
+          <div className="my-2 text-sm ">{textArea}</div>
+        </div>
+
+        <div className="mt-52 flex flex-col justify-end">
+          <div className="text-xs text-center">{footer}</div>
+        </div>
+      </section>
     </div>
   );
 }

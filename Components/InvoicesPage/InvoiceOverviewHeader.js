@@ -1,6 +1,6 @@
 export default function InvoiceOverviewHeader({ handleSelectAll, selectAll }) {
   return (
-    <div className="grid grid-3 w-1/2 pr-4 text-lg font-bold mb-4">
+    <div className="ml-5 grid grid-cols-3 pr-4 text-lg rounded-xl mb-4 content-around bg-gradient-to-r from-energy-100 to-energy-400 h-10">
       {/* <input
         type="checkbox"
         name="selectAll"
@@ -17,7 +17,7 @@ export default function InvoiceOverviewHeader({ handleSelectAll, selectAll }) {
       </label>
       
       <label className="text-center font-mono" htmlFor="Total">
-        €/Total
+        Total
       </label>
     </div>
   );

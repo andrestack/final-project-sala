@@ -6,7 +6,7 @@ export default function LessonOverviewHeader({handleSelectAll,selectAll}) {
 
 
   return (
-    <div className="text-xl mt-6 grid grid-cols-7 content-around bg-gradient-to-r from-energy-100 to-energy-400 h-10">
+    <div className="mx-10 rounded-xl text-xl mt-6 grid grid-cols-7 content-around bg-gradient-to-r from-energy-100 to-energy-400 h-10">
       
       <input
         type="checkbox"
