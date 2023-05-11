@@ -8,7 +8,7 @@ const Label = styled.label`
   }
 `;
 
-export default function InvoiceForm({ invoiceInfo }) {
+export default function InvoiceForm({ invoiceInfo, handleToggleForm }) {
   const [address, setAddress] = useState("");
   const [name, setName] = useState("");
   const [invoiceNumber, setInvoiceNumber] = useState("");
@@ -49,6 +49,8 @@ export default function InvoiceForm({ invoiceInfo }) {
       alert("Invoice created successfully");
       // console.error(`Error: ${response.status}`);
     }
+
+    handleToggleForm();
   }
 
   return (
@@ -167,16 +169,16 @@ export default function InvoiceForm({ invoiceInfo }) {
           </div>
         </div>
       </div>
-      <div className="text-sm grid grid-cols-6 content-around border-b bg-gray-50 h-8">
+      <div className="text-sm grid grid-cols-5 content-around border-b bg-gray-50 h-8">
         <label className="text-center font-mono" htmlFor="Date">
           Date
         </label>
         <label className="text-center font-mono" htmlFor="Course">
           Course
         </label>
-        <label className="text-center font-mono" htmlFor="End Time">
+        {/* <label className="text-center font-mono" htmlFor="End Time">
           Duration
-        </label>
+        </label> */}
         <label className="text-center font-mono" htmlFor="Units">
           Units
         </label>
@@ -195,13 +197,13 @@ export default function InvoiceForm({ invoiceInfo }) {
           return (
             <div
               key={lesson._id}
-              className="bg-white grid grid-cols-6 content-around text-center"
+              className="bg-white grid grid-cols-5 content-around text-center"
             >
               <Label htmlFor="date">{date}</Label>
               <Label htmlFor="course-code">{lesson.courseCode}</Label>
-              <Label htmlFor="duration">
+              {/* <Label htmlFor="duration">
                 {millisToMinutesAndSeconds(duration)}
-              </Label>
+              </Label> */}
               <Label>{lesson.unitTotal}</Label>
               <Label>{fee}</Label>
               <Label htmlFor="total">{lesson.unitTotal * fee}</Label>
@@ -210,16 +212,16 @@ export default function InvoiceForm({ invoiceInfo }) {
         })}
       </section>
 
-      <div className="text-sm mt-6 grid grid-cols-6 content-around border-t bg-gray-50 h-8">
+      <div className="text-sm mt-6 grid grid-cols-5 content-around border-t bg-gray-50 h-8">
         <label className="text-center font-mono" htmlFor="Date"></label>
         <label className="text-center font-mono" htmlFor="Course"></label>
-        <label className="text-center font-mono" htmlFor="Duration"></label>
+        
         <label className="text-center font-mono" htmlFor="total-units">
           {allTotal}
         </label>
         <label className="text-center font-mono" htmlFor="Euro-unit"></label>
         <label className="text-center font-mono" htmlFor="total-euro">
-          {allTotal && allTotal * 25}
+          {allTotal && allTotal * 25}€
         </label>
       </div>
 
@@ -257,13 +259,14 @@ export default function InvoiceForm({ invoiceInfo }) {
           className="w-full py-2 px-4 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-150 ease-in-out hover:bg-gray-100"
         ></textarea>
       </div>
-      <button
-              className="font-mono m-auto bg-gradient-to-r from-energy-100 to-energy-400 hover:from-focus-400 hover:to-focus-100 rounded-md text-white p-4 text-align-center"
-              type="submit"
-            >
-              Create Invoice
-            </button>
-
+      <div className="text-center">
+        <button
+          className="font-sans text-lg mt-6 bg-gradient-to-r from-energy-100 to-energy-400 hover:from-focus-400 hover:to-focus-100 rounded-md text-white p-4 text-align-center"
+          type="submit"
+        >
+          Create Invoice
+        </button>
+      </div>
     </form>
   );
 }

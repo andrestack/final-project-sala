@@ -24,7 +24,7 @@ export default function LessonsPage() {
 
   return (
     <>
-      <h1 className="bg-none p-10 text-center font-mono text-energy-200 text-2xl">
+      <h1 className="bg-none p-5 m-20 text-center font-sans font-bold text-energy-200 text-3xl">
         YOUR LESSON OVERVIEW
       </h1>
       <LessonOverviewHeader
@@ -46,7 +46,7 @@ export default function LessonsPage() {
           isFormOpen ? "translate-x-100" : "translate-x-full"
         } bg-grey-50 absolute right-0 top-0 h-screen w-1/2 z-10 ${isFormOpen}`}
       >
-        <InvoiceForm invoiceInfo={invoiceInfo} />
+        <InvoiceForm handleToggleForm={handleToggleForm} invoiceInfo={invoiceInfo} />
         {/* <InvoiceForm invoiceInfo={invoiceInfo} /> */}
       </div>
       {/* </div> */}

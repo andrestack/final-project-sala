@@ -20,13 +20,8 @@ export default async function handler(request, response) {
       );
       /* first get the lesson and then calculate how long it took by examining 
       the start and end time and then assign a value of endtime and then also of unit */
-      response.status(200).json(updatedLesson);
+      return response.status(200).json(updatedLesson);
     default:
       return response.status(404).json({ status: "Not found" });
   }
 }
-
-
-
-
-

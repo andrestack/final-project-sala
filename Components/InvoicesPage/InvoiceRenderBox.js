@@ -52,27 +52,33 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
     return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
   }
 
-  const { date, address, invoiceNumber, IBAN, taxNumber, name, total } =
+  const { date, address, invoiceNumber, IBAN, taxNumber, name, total, footer, textArea } =
     showInvoice;
 
   return (
-    <div className="bg-white text-sm font-mono rounded-lg ml-5 shadow-md p-5 w-5/6 pl-4 border-2 border-energy-200">
-      <section className="grid grid-cols-2">
-        <p name="name">{name}</p>
-        <p name="address">{address}</p>
-        <p name="invoiceNumber">Invoice Nr.: {invoiceNumber}</p>
-        <p name="IBAN">IBAN: {IBAN}</p>
-        <p name="taxNumber">Tax Nr.: {taxNumber}</p>
-        <p name="date">{date && new Date(date).toLocaleDateString()}</p>
-      </section>
-      <section className="text-sm mt-6 grid grid-cols-5 content-around h-8 border-b">
+    <div className="bg-white flex flex-col text-lg font-mono rounded-lg ml-5 shadow-md p-5 mr-10 h-4/5 px-4 border-2 border-energy-200">
+      <div className="justify-between items-start p-5">
+        <section className="w-full sm:w-1/2">
+          <p className="my-2" name="name">{name}</p>
+          <p className="my-2" name="address">{address}</p>
+        </section>
+        <div className="w-full sm:w-1/2 mt-10">
+          <p className="my-2" name="invoiceNumber">Invoice Nr.: {invoiceNumber}</p>
+          <p className="my-2" name="IBAN">IBAN: {IBAN}</p>
+          <p className="my-2" name="taxNumber">Tax Nr.: {taxNumber}</p>
+          
+        </div>
+        
+      </div>
+      <p className="mt-24 text-right mx-10" name="date">Berlin, {date && new Date(date).toLocaleDateString()}</p>
+      <div className="mt-20 text-lg grid grid-cols-5 content-around border-b">
         <label className="text-center font-mono" htmlFor="Date">
           Date
         </label>
         <label className="text-center font-mono" htmlFor="Course">
           Course
         </label>
-        
+
         <label className="text-center font-mono" htmlFor="Units">
           Units
         </label>
@@ -82,7 +88,7 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
         <label className="text-center font-mono" htmlFor="Total">
           €/Total
         </label>
-      </section>
+      </div>
       <section className="border-b h-8">
         {lessons?.map((lesson) => {
           const options = { month: "numeric", day: "numeric" };
@@ -99,7 +105,7 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
             >
               <Label htmlFor="date">{date}</Label>
               <Label htmlFor="course-code">{lesson.courseCode}</Label>
-              
+
               <Label>{lesson.unitTotal}</Label>
               <Label>{fee}</Label>
               <Label htmlFor="total">{lesson.unitTotal * fee}</Label>
@@ -107,7 +113,7 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
           );
         })}
       </section>
-      <div className="text-sm mt-6 grid grid-cols-5 content-around bg-white h-8">
+      <div className="text-lg mt-6 grid grid-cols-5 content-around bg-white h-8">
         <label className="text-center font-mono" htmlFor="Date"></label>
         <label className="text-center font-mono" htmlFor="Course"></label>
         {/* <label className="text-center font-mono" htmlFor="Duration"></label> */}
@@ -119,6 +125,18 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
           {total && total * 25}
         </label>
       </div>
+<section className="mt-8 p-5">
+<div>
+  <div className="my-2 text-sm ">{textArea}</div>
+  </div>
+  
+  <div className="mt-52 flex flex-col justify-end">
+  <div className="text-xs text-center">{footer}</div>
+  </div>
+
+
+</section>
+
     </div>
   );
 }
