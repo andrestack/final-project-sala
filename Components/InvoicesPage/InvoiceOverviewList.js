@@ -25,7 +25,7 @@ export default function InvoiceOverviewList({ filteredData, onClick }) {
           const fee = 25;
           return (
             <div
-              className="ml-5 grid grid-cols-3 text-energy-200 text-lg  shadow-lg hover:shadow-energy-400 p-5 transition ease-out hover:-translate-x-2 delay-150"
+              className="ml-5 grid grid-cols-3 text-energy-200 text-lg  shadow-lg hover:shadow-[1px_1px_7px_3px_#ff7f11] p-5 transition ease-out hover:-translate-x-2 delay-150"
               onClick={() => handleClick(invoice)}
               key={invoice._id}
               id="lessons"
