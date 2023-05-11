@@ -89,7 +89,7 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
           €/Total
         </label>
       </div>
-      <section className="border-b h-8">
+      <section className="h-8">
         {lessons?.map((lesson) => {
           const options = { month: "numeric", day: "numeric" };
           const date = new Date(lesson.startTime).toLocaleDateString(
@@ -113,7 +113,7 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
           );
         })}
       </section>
-      <div className="text-lg mt-6 grid grid-cols-5 content-around bg-white h-8">
+      <div className="text-lg mt-9 grid grid-cols-5 content-around bg-white h-8 border-t">
         <label className="text-center font-mono" htmlFor="Date"></label>
         <label className="text-center font-mono" htmlFor="Course"></label>
         {/* <label className="text-center font-mono" htmlFor="Duration"></label> */}
@@ -122,7 +122,7 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
         </label>
         <label className="text-center font-mono" htmlFor="Euro-unit"></label>
         <label className="text-center font-mono" htmlFor="total-euro">
-          {total && total * 25}
+          {total * 25}€
         </label>
       </div>
 <section className="mt-8 p-5">

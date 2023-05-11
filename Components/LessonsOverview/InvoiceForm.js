@@ -189,7 +189,7 @@ export default function InvoiceForm({ invoiceInfo, handleToggleForm }) {
           €/Total
         </label>
       </div>
-      <section className="bg-orange-50">
+      <section className="bg-grey-50 mt-2">
         {invoiceInfo.lessons?.map((lesson) => {
           const date = new Date(lesson.startTime).toLocaleDateString();
           const duration = lesson.endTime - lesson.startTime;
@@ -197,7 +197,7 @@ export default function InvoiceForm({ invoiceInfo, handleToggleForm }) {
           return (
             <div
               key={lesson._id}
-              className="bg-white grid grid-cols-5 content-around text-center"
+              className="bg-grey-50 grid grid-cols-5 content-around text-center"
             >
               <Label htmlFor="date">{date}</Label>
               <Label htmlFor="course-code">{lesson.courseCode}</Label>
