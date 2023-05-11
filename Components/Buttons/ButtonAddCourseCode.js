@@ -25,7 +25,7 @@ export default function ButtonAddCourseCode() {
       <div className="text-2xl text-center m-10 text-white font-sans">
         What course are you teaching?
       </div>
-      <div className="mx-96  mt-10 bg-gradient-to-r sm:flex-col from-focus-400 via-focus-100 to-focus-300 p-6 rounded-2xl">
+      <div className="mx-96  mt-10 mb-10 bg-gradient-to-r sm:flex-col from-focus-400 via-focus-100 to-focus-300 p-6 rounded-2xl">
         <div className="grid grid-cols-2 space-x-6">
           <label className="text-right mr-2">
             <input
@@ -37,7 +37,7 @@ export default function ButtonAddCourseCode() {
               className="p-2.5 text-sm font-sans rounded-xl lg:flex-col"
             />
           </label>
-          <div className="w-full">
+          <div className="">
             <button
               name="button"
               disabled={noInput}

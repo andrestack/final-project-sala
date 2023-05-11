@@ -55,10 +55,10 @@ export default function InvoiceForm({ invoiceInfo, handleToggleForm }) {
 
   return (
     <form
-      className="bg-gray-50 px-8 py-8 rounded-lg shadow-lg"
+      className="bg-gray-50 px-8 py-8 rounded-lg shadow-lg h-full"
       onSubmit={handleSubmit}
     >
-      <div className="flex flex-wrap justify-between items-start h-full">
+      <div className="flex flex-wrap justify-between items-start">
         <div className="w-full sm:w-1/2 mb-8 pr-4">
           <h2 className="text-lg font-medium mb-4">Contractor Information</h2>
           <div className="mb-4">

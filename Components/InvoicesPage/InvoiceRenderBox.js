@@ -2,17 +2,7 @@ import styled from "styled-components";
 import InvoiceForm from "Components/LessonsOverview/InvoiceForm2";
 import useSWR from "swr";
 
-const FormContainer = styled.form`
-  display: grid;
-  gap: 0.5rem;
-  background-color: yellow;
-  @media (max-width: 390px) {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    width: 15rem;
-  }
-`;
+
 
 const Label = styled.label`
   font-weight: bold;
@@ -21,29 +11,6 @@ const Label = styled.label`
   }
 `;
 
-const Input = styled.input`
-  padding: 0.5rem;
-  font-size: inherit;
-  border: 1px solid black;
-  background-color: #b4c7a8;
-  border-radius: 0.3rem;
-  font-size: 1rem;
-  @media (max-width: 390px) {
-    width: 15rem;
-  }
-`;
-
-const Textarea = styled.textarea`
-  adding: 0.5rem;
-  font-size: inherit;
-  border: 1px solid black;
-  background-color: #b4c7a8;
-  border-radius: 0.3rem;
-  font-size: 1rem;
-  @media (max-width: 390px) {
-    width: 15rem;
-  }
-`;
 
 export default function InvoiceRenderBox({ showInvoice, lessons }) {
   function millisToMinutesAndSeconds(millis) {
@@ -65,7 +32,7 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
   } = showInvoice;
 
   return (
-    <div className="bg-white sticky top-0  text-lg font-mono rounded-lg ml-5 shadow-md p-5 mr-10 h-4/5 px-4 border-2 border-energy-200">
+    <div className="bg-white sticky top-0  text-base font-mono rounded-lg ml-5 shadow-md p-5 mr-10 h-fit px-4 border-2 border-energy-200">
       <div className=" p-5">
         <section className="w-full sm:w-1/2">
           <p className="my-2" name="name">
@@ -90,7 +57,7 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
       <p className="mt-20 text-right mx-10" name="date">
         Berlin, {date && new Date(date).toLocaleDateString()}
       </p>
-      <div className="mt-20 text-lg grid grid-cols-5 content-around border-b">
+      <div className="mt-20 text-base grid grid-cols-5 content-around border-b">
         <label className="text-center font-mono" htmlFor="Date">
           Date
         </label>
@@ -132,7 +99,7 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
           );
         })}
       </section>
-      <div className="text-lg mt-9 grid grid-cols-5 content-around bg-white h-8 border-t">
+      <div className="text-base mt-9 grid grid-cols-5 content-around bg-white h-8 border-t">
         <label className="text-center font-mono" htmlFor="Date"></label>
         <label className="text-center font-mono" htmlFor="Course"></label>
         {/* <label className="text-center font-mono" htmlFor="Duration"></label> */}
