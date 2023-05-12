@@ -17,6 +17,7 @@ export default function LandingPage() {
           alt="Picture of the author"
           width={700}
           height={700}
+          style={{opacity: 0.5}}
         />
         <Link href="/home">
           <button className="mt-10 px-8 py-4 text-energy-200 border border-focus-100 font-sans text-xl rounded-2xl hover:shadow-[1px_1px_10px_5px_#ffc20e] transition ease-out hover:-translate-y-2 delay-150">
