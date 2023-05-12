@@ -2,8 +2,9 @@ import LessonOverviewHeader from "Components/LessonsOverview/LessonOverviewHeade
 import LessonOverviewList from "Components/LessonsOverview/LessonOverviewList";
 import { useState } from "react";
 import InvoiceForm from "Components/LessonsOverview/InvoiceForm";
-import ButtonOpenInvoiceForm from "Components/Buttons/ButtonOpenInvoiceForm";
-import MockUp from "Components/LessonsOverview/InvoiceForm";
+
+import Header from "Components/Header";
+import Head from "next/head";
 
 export default function LessonsPage() {
   const [selectAll, setSelectAll] = useState(false);
@@ -24,6 +25,12 @@ export default function LessonsPage() {
 
   return (
     <>
+    <Head>
+        <title>Your Lessons</title>
+        <meta name="description" content="lessons" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+    <Header/>
       <h1 className="bg-none p-5 m-20 text-center font-sans font-bold text-energy-200 text-3xl">
         YOUR LESSON OVERVIEW
       </h1>
