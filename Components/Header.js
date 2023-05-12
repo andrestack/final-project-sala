@@ -7,7 +7,7 @@ export default function Header() {
       <nav className="font-sans flex flex-row justify-center space-x-4 p-3 my-5 mx-20">
         <div className="bg-focus-400 rounded-3xl px-5 py-4">
           <Link
-            href="/"
+            href="/home"
             className="font-sans text-focus-100 px-3 py-2 rounded-3xl hover:bg-focus-200 hover:text-energy-400 focus:outline-none focus:text-energy-400 focus:bg-focus-200"
           >
             Home

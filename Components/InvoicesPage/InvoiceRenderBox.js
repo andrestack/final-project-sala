@@ -1,8 +1,6 @@
 import styled from "styled-components";
-import InvoiceForm from "Components/LessonsOverview/InvoiceForm2";
-import useSWR from "swr";
-
-
+import html2canvas from "html2canvas";
+import { useRef } from "react";
 
 const Label = styled.label`
   font-weight: bold;
@@ -11,12 +9,17 @@ const Label = styled.label`
   }
 `;
 
-
 export default function InvoiceRenderBox({ showInvoice, lessons }) {
-  function millisToMinutesAndSeconds(millis) {
-    var minutes = Math.floor(millis / 60000);
-    var seconds = ((millis % 60000) / 1000).toFixed(0);
-    return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+  const captureRef = useRef(null);
+
+  function saveAsImage() {
+    html2canvas(captureRef.current).then((canvas) => {
+      const image = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
+      link.href = image;
+      link.download = "image.png";
+      link.click();
+    });
   }
 
   const {
@@ -32,7 +35,10 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
   } = showInvoice;
 
   return (
-    <div className="bg-white sticky top-0  text-base font-mono rounded-lg ml-5 shadow-md p-5 mr-10 h-fit px-4 border-2 border-energy-200">
+    <div
+      ref={captureRef}
+      className="bg-white text-base font-mono rounded-lg ml-5 shadow-md p-5 mr-10 h-auto px-4 border-2 border-energy-200 relative"
+    >
       <div className=" p-5">
         <section className="w-full sm:w-1/2">
           <p className="my-2" name="name">
@@ -75,7 +81,7 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
           €/Total
         </label>
       </div>
-      <section className="h-8">
+      <section className="h-auto">
         {lessons?.map((lesson) => {
           const options = { month: "numeric", day: "numeric" };
           const date = new Date(lesson.startTime).toLocaleDateString(
@@ -86,7 +92,7 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
           const fee = 25;
           return (
             <div
-              className="grid grid-cols-5 content-around text-center text-sm mt-2"
+              className="grid grid-cols-5 content-around text-center text-sm mt-2 h-auto"
               key={lesson._id}
             >
               <Label htmlFor="date">{date}</Label>
@@ -120,6 +126,11 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
           <div className="text-xs text-center">{footer}</div>
         </div>
       </section>
+      <div className="absolute top-2 right-7 text-center">
+      <button className="p-1 text-4xl">
+        <a onClick={saveAsImage}>⎙</a>
+      </button>
+      </div>
     </div>
   );
 }

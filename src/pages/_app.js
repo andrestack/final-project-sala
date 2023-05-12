@@ -1,9 +1,10 @@
 import "@/styles/globals.css";
 import Header from "../../Components/Header";
 import { SWRConfig } from "swr";
-import { Montserrat } from "next/font/google";
+import { Lancelot, Montserrat } from "next/font/google";
 import { BrowserRoutes } from "react-router-dom";
 import SlideRoutes from "react-slide-routes";
+import LandingPage from ".";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -21,11 +22,13 @@ export default function App({ Component, pageProps }) {
             fetcher,
             refreshInterval: 1000,
           }}
-        ></SWRConfig>
+        >
 
-        <Header />
+        {/* <Header /> */}
 
         <Component {...pageProps} on />
+        
+        </SWRConfig>
       </main>
     </>
   );

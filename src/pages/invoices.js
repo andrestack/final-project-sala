@@ -1,8 +1,9 @@
 import InvoiceOverviewHeader from "Components/InvoicesPage/InvoiceOverviewHeader";
 import InvoiceOverviewList from "Components/InvoicesPage/InvoiceOverviewList";
 import { useState } from "react";
-import InvoiceRenderBox from "Components/InvoicesPage/InvoiceRenderBox";
 import InvoicePage from "Components/InvoicesPage/InvoicePage";
+import Header from "Components/Header";
+import Head from "next/head";
 
 
 export default function InvoicesPage({invoiceInfo}) {
@@ -13,6 +14,13 @@ export default function InvoicesPage({invoiceInfo}) {
 
   return (
     <>
+    <Head>
+        <title>Your Invoices</title>
+        <meta name="description" content="invoices" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+    <Header/>
       <h1 className="bg-none p-5 m-20 text-center font-sans font-bold text-energy-200 text-3xl">
         YOUR INVOICE OVERVIEW
       </h1>

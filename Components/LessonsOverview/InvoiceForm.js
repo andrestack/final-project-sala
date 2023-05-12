@@ -55,7 +55,7 @@ export default function InvoiceForm({ invoiceInfo, handleToggleForm }) {
 
   return (
     <form
-      className="bg-gray-50 px-8 py-8 rounded-lg shadow-lg h-full"
+      className="bg-gray-50 px-8 py-8 rounded-lg shadow-lg h-auto"
       onSubmit={handleSubmit}
     >
       <div className="flex flex-wrap justify-between items-start">
@@ -197,7 +197,7 @@ export default function InvoiceForm({ invoiceInfo, handleToggleForm }) {
           return (
             <div
               key={lesson._id}
-              className="bg-grey-50 grid grid-cols-5 content-around text-center"
+              className="bg-grey-50 grid grid-cols-5 content-around text-center h-auto"
             >
               <Label htmlFor="date">{date}</Label>
               <Label htmlFor="course-code">{lesson.courseCode}</Label>
