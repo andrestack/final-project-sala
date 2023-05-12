@@ -2,9 +2,9 @@
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx}",
-    "./src/components/**/*.{js,ts,jsx,tsx}",
+    "./src/Components/**/*.{js,ts,jsx,tsx}",
     "./src/app/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    "./Components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     screens: {
@@ -16,11 +16,11 @@ module.exports = {
 
     extend: {
       backgroundImage: {
-        'focus-mode': "url('/image/')"
+        "focus-mode": "url('/image/')",
       },
-      
+
       fontFamily: {
-        sans: ["var(--font-montserrat)"]
+        sans: ["var(--font-montserrat)"],
       },
       colors: {
         focus: {
