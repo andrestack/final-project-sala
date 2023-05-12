@@ -14,12 +14,8 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
 
   function saveAsImage() {
     html2canvas(captureRef.current).then((canvas) => {
-      try {
-        const image = canvas.toDataURL("image/png");
-      } catch (e) {
-        // If the canvas is tainted, we cannot read from it.
-        console.log(e);
-      }
+      const image = canvas.toDataURL("image/png");
+
       const link = document.createElement("a");
       link.href = image;
       link.download = "image.png";
@@ -132,9 +128,9 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
         </div>
       </section>
       <div className="absolute top-2 right-7 text-center">
-      <button className="p-1 text-4xl">
-        <a onClick={saveAsImage}>⎙</a>
-      </button>
+        <button className="p-1 text-4xl">
+          <a onClick={saveAsImage}>⎙</a>
+        </button>
       </div>
     </div>
   );
