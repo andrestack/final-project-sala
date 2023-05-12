@@ -18,7 +18,7 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
 
       const link = document.createElement("a");
       link.href = image;
-      link.download = "image.png";
+      link.download = "invoice.png";
       link.click();
     });
   }
