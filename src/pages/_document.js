@@ -7,7 +7,7 @@ export default function Document() {
     <Html lang="en">
       <Head />
       <body>
-{/* <Background /> */}
+
         <Main />
         <JitsiScript/>
         <NextScript />
@@ -16,8 +16,3 @@ export default function Document() {
   )
 }
 
-/*
-
-1. api route "lessons/[id]"
-
-*/

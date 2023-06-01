@@ -1,10 +1,10 @@
 import "@/styles/globals.css";
-import Header from "../../Components/Header";
 import { SWRConfig } from "swr";
-import { Lancelot, Montserrat } from "next/font/google";
-import { BrowserRoutes } from "react-router-dom";
-import SlideRoutes from "react-slide-routes";
-import LandingPage from ".";
+import { Montserrat } from "next/font/google";
+import React from "react";
+import { UserProvider, useUser } from "@auth0/nextjs-auth0/client";
+
+
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -23,11 +23,9 @@ export default function App({ Component, pageProps }) {
             refreshInterval: 1000,
           }}
         >
-
-        {/* <Header /> */}
-
-        <Component {...pageProps} on />
-        
+          <UserProvider>
+            <Component {...pageProps} on />
+          </UserProvider>
         </SWRConfig>
       </main>
     </>
