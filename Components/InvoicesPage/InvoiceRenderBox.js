@@ -38,7 +38,7 @@ export default function InvoiceRenderBox({ showInvoice, lessons }) {
   return (
     <div
       ref={captureRef}
-      className="bg-white text-base font-mono rounded-lg ml-5 shadow-md p-5 mr-10 h-auto px-4 border-2 border-energy-200 relative"
+      className="bg-white text-base top-0 font-mono rounded-lg ml-5 shadow-md p-5 mr-10 h-fit px-4 border-2 border-energy-200 relative"
     >
       <div className=" p-5">
         <section className="w-full sm:w-1/2">

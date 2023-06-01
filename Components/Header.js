@@ -24,6 +24,12 @@ export default function Header() {
           >
             Your Invoices
           </Link>
+          <Link
+            href="/api/auth/logout"
+            className="font-sans text-focus-100 px-3 py-2 rounded-3xl hover:bg-focus-200 hover:text-energy-400 focus:outline-none focus:text-energy-400 focus:bg-focus-200"
+          >
+            Log-out
+          </Link>
         </div>
       </nav>
     </div>
