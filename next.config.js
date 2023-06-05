@@ -12,3 +12,4 @@ const nextConfig = {
         "http://localhost:3000",
     },
   };
+  
