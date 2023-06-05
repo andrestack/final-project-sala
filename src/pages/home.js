@@ -7,7 +7,6 @@ import ButtonAddCourseCode from "Components/Buttons/ButtonAddCourseCode";
 export default function Home() {
   const {user}=useUser()
 
-  //need a forEach to get the user name
   
  
 
