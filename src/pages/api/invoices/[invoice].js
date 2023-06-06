@@ -6,7 +6,7 @@ import dbConnect from "db/connect";
 export default async function handler(request, response) {
     await dbConnect();
     const { invoice } = request.query;
-    console.log("query", request.query)
+    
 
   
    
