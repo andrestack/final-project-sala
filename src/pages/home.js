@@ -20,7 +20,7 @@ export default function Home() {
       </Head>
 
       <Header />
-      <h1 className="bg-none p-1 text-left ml-36 mt-9 font-sans font-bold text-energy-100 text-3xl m-1">
+      <h1 className="bg-none p-1 text-left ml-42 mt-9 font-sans font-bold text-energy-100 text-3xl m-1">
         Hey {user?.given_name} 
         
       </h1>
