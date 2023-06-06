@@ -33,7 +33,7 @@ export default function LandingPage() {
             Entrar
           </button>
         </NavLink>
-        
+      
       </main>
 
       <footer className="w-full h-12 flex justify-center items-center text-focus-400 font-sans">
