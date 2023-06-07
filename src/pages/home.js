@@ -16,10 +16,10 @@ export default function Home() {
       </Head>
 
       <Header />
-      <h1 className="bg-none p-1 text-left ml-72 mt-9 font-sans font-bold text-energy-100 text-3xl m-1">
+      <h1 className="m-1 ml-72 mt-9 bg-none p-1 text-left font-sans text-3xl font-bold text-energy-100">
         Hey {user?.given_name}
       </h1>
-      <h2 className="bg-none p-1 text-center font-sans font-bold text-energy-200 text-7xl ">
+      <h2 className="bg-none p-1 text-center font-sans text-7xl font-bold text-energy-200 ">
         {" "}
         Welcome to your Sala
       </h2>
