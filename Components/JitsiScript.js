@@ -1,4 +1,4 @@
 export default function JitsiScript() {
-    return <script src="https://meet.jit.si/external_api.js" async />;
+    return <script src='https://8x8.vc/external_api.js'></script>;
   }
   
