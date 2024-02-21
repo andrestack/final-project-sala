@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
+import {toast} from "react-hot-toast"
 
 export default function JitsiMeet({ courseCode }) {
   const jitsiContainer = useRef(null);
@@ -22,7 +23,7 @@ export default function JitsiMeet({ courseCode }) {
       text: "center",
       parentNode: jitsiContainer.current,
       configOverwrite: {},
-      lang: "de",
+      lang: "en",
       interfaceConfigOverwrite: {
         SHOW_CHROME_EXTENSION_BANNER: false,
       },
@@ -31,12 +32,12 @@ export default function JitsiMeet({ courseCode }) {
     jitsiApi.current = new JitsiMeetExternalAPI(domain, options);
 
     jitsiApi.current.addListener("videoConferenceJoined", () => {
-      alert("The start time has been registered!");
+      toast.success("The start time has been registered!");
       handleMeetingStart();
     });
 
     jitsiApi.current.addListener("videoConferenceLeft", () => {
-      alert("The end time has been registered. You will end the meeting");
+      toast.success("The end time has been registered");
       handleMeetingEnd();
       window.location.href = "https://final-project-sala.vercel.app/lessons";
       jitsiClose();
@@ -58,7 +59,7 @@ export default function JitsiMeet({ courseCode }) {
       });
 
       if (!response.ok) {
-        alert("Unable to register meeting start time. Please inform the admin");
+        toast.error("ERROR! Please inform the admin");
       } else {
         console.error(`Error: ${response.status}`);
       }
