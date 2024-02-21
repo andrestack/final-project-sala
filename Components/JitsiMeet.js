@@ -18,6 +18,7 @@ export default function JitsiMeet({ courseCode }) {
     const domain = "meet.jit.si";
     const options = {
       roomName: randomRoomName,
+      id: randomRoomNumber,
       width: "500px",
       height: "700px",
       text: "center",
