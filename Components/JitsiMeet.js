@@ -10,14 +10,14 @@ export default function JitsiMeet({ courseCode }) {
   const chance = new Chance();
 
   const randomCountry = chance.country({ full: true });
-  const randomAnimal = chance.animal({ type: "ocean" });
+  // const randomAnimal = chance.animal({ type: "ocean" });
   const randomRoomNumber = chance.natural({ min: 156789547, max: 999999999 });
-  const randomRoomName = randomCountry + randomAnimal;
+  const randomRoomName = randomRoomNumber + randomCountry;
 
   useEffect(() => {
     const domain = "meet.jit.si";
     const options = {
-      roomName: randomRoomName,
+      roomName: randomRoomNumber,
       width: "500px",
       height: "700px",
       text: "center",
@@ -28,6 +28,7 @@ export default function JitsiMeet({ courseCode }) {
         SHOW_CHROME_EXTENSION_BANNER: false,
       },
     };
+
 
     jitsiApi.current = new JitsiMeetExternalAPI(domain, options);
 
