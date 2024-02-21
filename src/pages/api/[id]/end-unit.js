@@ -1,6 +1,7 @@
 import dbConnect from "db/connect";
 import Lesson from "db/models/Lesson";
 import { lessonUnits } from "utils/lessonUnits";
+import {toast} from "react-hot-toast"
 
 export default async function handler(request, response) {
   await dbConnect();
@@ -10,6 +11,10 @@ export default async function handler(request, response) {
   switch (request.method) {
     case "PATCH":
       const lesson = await Lesson.findOne({ roomName });
+      if(!lesson){
+        toast.error("Lesson not found!")
+        return response.status(404).json({error: "Lesson not found!"})
+      }
       const startTime = lesson.startTime;
       const duration = endTime - startTime;
       const unitTotal = lessonUnits(duration);
