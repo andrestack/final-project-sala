@@ -3,14 +3,14 @@ import Lesson from "db/models/Lesson";
 
 export default async function handler(request, response) {
   await dbConnect();
-  const { id: id } = request.query;
+  const { id: roomName } = request.query;
   const { courseCode } = request.body;
   const startTime = new Date();
 
   switch (request.method) {
     case "POST":
       const lesson = await Lesson.create({
-        id,
+        roomName,
         startTime,
         courseCode,
       });

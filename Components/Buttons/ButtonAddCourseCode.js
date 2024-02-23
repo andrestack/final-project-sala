@@ -18,7 +18,7 @@ export default function ButtonAddCourseCode() {
   function handleOpenMeetingClick() {
     setIsMeetingButtonDisabled(true);
   }
-  console.log(courseCode);
+  
 
   return (
     <>

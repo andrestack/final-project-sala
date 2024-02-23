@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 
 export default async function handler(request, response) {
   await dbConnect();
-  const { id: id } = request.query;
+  const { id: roomName } = request.query;
   const endTime = new Date();
 
   switch (request.method) {
