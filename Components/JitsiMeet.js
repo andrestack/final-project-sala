@@ -1,35 +1,35 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
-import JitsiScript from "./JitsiScript";
 
 export default function JitsiMeet({ courseCode }) {
   const [joinEvent, setJoinEvent] = useState(null);
 
   const jitsiContainer = useRef(null);
+  const api = useRef(null);
 
   useEffect(() => {
-    const domain = "meet.jit.si";
-    const options = {
-      roomName: "1234556674",
-      width: "",
-      height: 600,
-      parentNode: jitsiContainer.current,
-      lang: "en",
-      interfaceConfigOverwrite: {
-        SHOW_CHROME_EXTENSION_BANNER: false,
-      },
-    };
+    if (!api.current) {
+      const domain = "meet.jit.si";
+      const options = {
+        roomName: "1234556674",
+        width: "",
+        height: 600,
+        parentNode: jitsiContainer.current,
+        lang: "en",
+        interfaceConfigOverwrite: {
+          SHOW_CHROME_EXTENSION_BANNER: false,
+        },
+      };
 
-    const api = new JitsiMeetExternalAPI(domain, options);
-
-    api.addListener("videoConferenceJoined", (e) => {
-      console.log("Start", e);
-    });
-
+      api.current = new JitsiMeetExternalAPI(domain, options);
+      api.current.addListener("videoConferenceJoined", () => {
+        console.log("Start");
+      });
+    }
     return () => {
-      if (api) {
-        api.dispose();
+      if (api.current) {
+        api.current.dispose();
       }
     };
   }, []);
